@@ -1,0 +1,4 @@
+--create tablespace UN_MUSEO datafile '/opt/oracle/oradata/FREE/UN_MUSEO.dbf' size 100M;
+--alter session set "_ORACLE_SCRIPT" = true;
+--create user MuseoP identified by "1234" default tablespace UN_MUSEO;
+--grant dba to MuseoP;

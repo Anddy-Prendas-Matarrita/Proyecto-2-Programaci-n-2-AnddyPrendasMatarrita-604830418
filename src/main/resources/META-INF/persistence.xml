@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <persistence-unit name="proyecto2_Proyecto2AnddyPrendasMatarrita_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>proyecto2.proyecto2anddyprendasmatarrita.MahnTickets</class>
+    <class>proyecto2.proyecto2anddyprendasmatarrita.MahnSpecies</class>
+    <class>proyecto2.proyecto2anddyprendasmatarrita.MahnRatings</class>
+    <class>proyecto2.proyecto2anddyprendasmatarrita.MahnVisitors</class>
+    <class>proyecto2.proyecto2anddyprendasmatarrita.MahnRooms</class>
+    <class>proyecto2.proyecto2anddyprendasmatarrita.MahnTicketRoom</class>
+    <class>proyecto2.proyecto2anddyprendasmatarrita.MahnCreditCards</class>
+    <class>proyecto2.proyecto2anddyprendasmatarrita.MahnTopics</class>
+    <class>proyecto2.proyecto2anddyprendasmatarrita.MahnMuseums</class>
+    <class>proyecto2.proyecto2anddyprendasmatarrita.MahnPrices</class>
+    <class>proyecto2.proyecto2anddyprendasmatarrita.MahnCollections</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:FREE"/>
+      <property name="javax.persistence.jdbc.user" value="MuseoP"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.password" value="1234"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
+    </properties>
+  </persistence-unit>
+</persistence>

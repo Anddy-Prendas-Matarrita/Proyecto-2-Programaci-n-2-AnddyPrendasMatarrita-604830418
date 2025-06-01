@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.proyecto2anddyprendasmatarrita.ReportsController">
+   <children>
+      <Pane layoutX="9.0" layoutY="11.0" prefHeight="377.0" prefWidth="167.0" style="-fx-border-color: black;">
+         <children>
+            <MenuButton layoutX="14.0" layoutY="162.0" mnemonicParsing="false" text="Mantenimientos">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
+                <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMSpecies" text="Especies" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMTopics" text="Temáticas" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMPrices" text="Precios" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMCreditCards" text="Comisiones" />
+              </items>
+            </MenuButton>
+            <MenuButton layoutX="14.0" layoutY="187.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Entradas">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
+                <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
+              </items>
+            </MenuButton>
+            <MenuButton layoutX="14.0" layoutY="212.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Valoración">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
+              </items>
+            </MenuButton>
+            <MenuButton layoutX="14.0" layoutY="237.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Reportes">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
+              </items>
+            </MenuButton>
+            <ImageView fitHeight="140.0" fitWidth="152.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <Pane layoutX="175.0" layoutY="11.0" prefHeight="377.0" prefWidth="412.0" style="-fx-border-color: black;">
+         <children>
+            <Label layoutX="142.0" layoutY="-2.0" text="Reportes">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Label>
+            <Button layoutX="34.0" layoutY="164.0" mnemonicParsing="false" text="Generar lista" />
+            <Button layoutX="231.0" layoutY="164.0" mnemonicParsing="false" text="Generar total a pagar" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

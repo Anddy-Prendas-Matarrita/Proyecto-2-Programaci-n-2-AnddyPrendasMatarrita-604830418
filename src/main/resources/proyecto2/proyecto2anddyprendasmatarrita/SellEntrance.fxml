@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="411.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.proyecto2anddyprendasmatarrita.SellEntranceController">
+   <children>
+      <Pane layoutX="2.0" layoutY="11.0" prefHeight="377.0" prefWidth="108.0" style="-fx-border-color: black;">
+         <children>
+            <MenuButton layoutX="2.0" layoutY="159.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="108.0" text="Mantenimientos">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
+                <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMSpecies" text="Especies" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMTopics" text="Temáticas" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMPrices" text="Precios" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMCreditCards" text="Comisiones" />
+              </items>
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </MenuButton>
+            <MenuButton layoutX="5.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Entradas">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
+                <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
+              </items>
+            </MenuButton>
+            <MenuButton layoutX="5.0" layoutY="214.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Valoración">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
+              </items>
+            </MenuButton>
+            <MenuButton layoutX="5.0" layoutY="239.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Reportes">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
+              </items>
+            </MenuButton>
+            <ImageView fitHeight="87.0" fitWidth="97.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <Pane layoutX="110.0" layoutY="11.0" prefHeight="377.0" prefWidth="570.0" style="-fx-border-color: black;">
+         <children>
+            <Label layoutX="178.0" layoutY="-2.0" text="Vender Entradas">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="47.0" prefHeight="17.0" prefWidth="124.0" text="Nombre de visitante:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="277.0" layoutY="47.0" prefHeight="17.0" prefWidth="90.0" text="Tipo de tarjeta:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <TextField layoutX="131.0" layoutY="43.0" prefHeight="25.0" prefWidth="137.0" />
+            <ComboBox layoutX="366.0" layoutY="43.0" prefHeight="25.0" prefWidth="167.0" />
+            <Button layoutX="431.0" layoutY="86.0" mnemonicParsing="false" text="Agregar" />
+            <Button layoutX="472.0" layoutY="338.0" mnemonicParsing="false" text="Vender" />
+            <Label layoutX="23.0" layoutY="90.0" prefHeight="17.0" prefWidth="46.0" text="Museo:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox layoutX="63.0" layoutY="86.0" prefHeight="25.0" prefWidth="167.0" />
+            <Label layoutX="249.0" layoutY="90.0" prefHeight="17.0" prefWidth="46.0" text="Fecha:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <TextField layoutX="292.0" layoutY="86.0" prefHeight="25.0" prefWidth="108.0" />
+            <TableView layoutX="57.0" layoutY="129.0" prefHeight="161.0" prefWidth="415.0">
+              <columns>
+                <TableColumn prefWidth="139.0" text="Museo" />
+                <TableColumn prefWidth="121.0" text="Fecha de visita" />
+                  <TableColumn prefWidth="153.0" text="Precio" />
+              </columns>
+            </TableView>
+            <Label layoutX="23.0" layoutY="321.0" prefHeight="17.0" prefWidth="54.0" text="Subtotal:" />
+            <Label layoutX="23.0" layoutY="342.0" prefHeight="17.0" prefWidth="54.0" text="IVA:" />
+            <Label layoutX="159.0" layoutY="321.0" prefHeight="17.0" prefWidth="90.0" text="TOTAL A PAGAR:" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

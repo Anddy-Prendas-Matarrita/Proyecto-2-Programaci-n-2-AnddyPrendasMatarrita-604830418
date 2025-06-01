@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="411.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.proyecto2anddyprendasmatarrita.RateRoomsController">
+   <children>
+      <Pane layoutX="2.0" layoutY="11.0" prefHeight="377.0" prefWidth="136.0" style="-fx-border-color: black;">
+         <children>
+            <MenuButton layoutX="4.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Mantenimientos">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
+                <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMSpecies" text="Especies" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMTopics" text="Temáticas" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMPrices" text="Precios" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMCreditCards" text="Comisiones" />
+              </items>
+            </MenuButton>
+            <MenuButton layoutX="5.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Entradas">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
+                <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
+              </items>
+            </MenuButton>
+            <MenuButton layoutX="5.0" layoutY="214.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Valoración">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
+              </items>
+            </MenuButton>
+            <MenuButton layoutX="5.0" layoutY="239.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Reportes">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <ImageView fitHeight="101.0" fitWidth="109.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Pane layoutX="14.0" layoutY="14.0" prefHeight="101.0" prefWidth="109.0" style="-fx-border-color: black;" />
+         </children>
+      </Pane>
+      <Pane layoutX="137.0" layoutY="11.0" prefHeight="377.0" prefWidth="543.0" style="-fx-border-color: black;">
+         <children>
+            <Label layoutX="184.0" layoutY="-2.0" text="Valoración de salas">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="69.0" layoutY="77.0" text="ESPECIES/TEMÁTICA" />
+            <Label layoutX="253.0" layoutY="274.0" text="Desea agregar una valoración?" />
+            <Pane layoutX="69.0" layoutY="94.0" prefHeight="101.0" prefWidth="109.0" style="-fx-border-color: black;">
+               <children>
+                  <ImageView fitHeight="101.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Label layoutX="204.0" layoutY="86.0" text="Nombre:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="204.0" layoutY="109.0" text="Colección:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="204.0" layoutY="136.0" text="Tipo:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="204.0" layoutY="161.0" text="Detalle:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="firstStar" fitHeight="25.0" fitWidth="28.0" layoutX="69.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/blackStar.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="69.0" layoutY="202.0" mnemonicParsing="false" onAction="#rate1Star" opacity="0.21" prefHeight="25.0" prefWidth="25.0" />
+            <ImageView fx:id="secondStar" fitHeight="25.0" fitWidth="28.0" layoutX="94.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/blackStar.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="94.0" layoutY="202.0" mnemonicParsing="false" onAction="#rate2Star" opacity="0.21" prefHeight="25.0" prefWidth="25.0" />
+            <ImageView fx:id="thirdStar" fitHeight="25.0" fitWidth="28.0" layoutX="119.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/blackStar.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="119.0" layoutY="202.0" mnemonicParsing="false" onAction="#rate3Star" opacity="0.21" prefHeight="25.0" prefWidth="25.0" />
+            <ImageView fx:id="fourthStar" fitHeight="25.0" fitWidth="28.0" layoutX="144.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/blackStar.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="144.0" layoutY="202.0" mnemonicParsing="false" onAction="#rate4Star" opacity="0.21" prefHeight="25.0" prefWidth="25.0" />
+            <ImageView fx:id="fifthStar" fitHeight="25.0" fitWidth="28.0" layoutX="172.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/blackStar.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="172.0" layoutY="202.0" mnemonicParsing="false" onAction="#rate5Star" opacity="0.21" prefHeight="25.0" prefWidth="25.0" />
+            <TextField layoutX="261.0" layoutY="74.0" />
+            <TextField layoutX="267.0" layoutY="105.0" />
+            <TextField layoutX="236.0" layoutY="132.0" />
+            <TextField layoutX="253.0" layoutY="157.0" />
+            <TextArea layoutX="253.0" layoutY="291.0" prefHeight="72.0" prefWidth="232.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
