@@ -18,6 +18,7 @@ public class RateRoomsController {
     @FXML
     private ImageView fifthStar;
     
+    @FXML
     public void rate1Star(){
         Image imagen=new Image("Images/selectedStar.png");
         Image imagen2=new Image("Images/blackStar.png");
@@ -27,6 +28,7 @@ public class RateRoomsController {
         fourthStar.setImage(imagen2);
         fifthStar.setImage(imagen2);
     }
+    @FXML
     public void rate2Star(){
         Image imagen=new Image("Images/selectedStar.png");
         Image imagen2=new Image("Images/blackStar.png");
@@ -36,6 +38,7 @@ public class RateRoomsController {
         fourthStar.setImage(imagen2);
         fifthStar.setImage(imagen2);
     }
+    @FXML
     public void rate3Star(){
         Image imagen=new Image("Images/selectedStar.png");
         Image imagen2=new Image("Images/blackStar.png");
@@ -45,6 +48,7 @@ public class RateRoomsController {
         fourthStar.setImage(imagen2);
         fifthStar.setImage(imagen2);
     }
+    @FXML
     public void rate4Star(){
         Image imagen=new Image("Images/selectedStar.png");
         Image imagen2=new Image("Images/blackStar.png");
@@ -54,6 +58,7 @@ public class RateRoomsController {
         fourthStar.setImage(imagen);
         fifthStar.setImage(imagen2);
     }
+    @FXML
     public void rate5Star(){
         Image imagen=new Image("Images/selectedStar.png");
         Image imagen2=new Image("Images/blackStar.png");
@@ -63,33 +68,43 @@ public class RateRoomsController {
         fourthStar.setImage(imagen);
         fifthStar.setImage(imagen);
     }
+    @FXML
     public void goToMRooms() throws IOException{
          App.setRoot("Rooms");
      }
+    @FXML
      public void goToMCollections() throws IOException{
          App.setRoot("Collections");
      }
+     @FXML
      public void goToMSpecies() throws IOException{
          App.setRoot("Species");
      }
+     @FXML
      public void goToMTopics() throws IOException{
          App.setRoot("Topics");
      }
+     @FXML
      public void goToMPrices() throws IOException{
          App.setRoot("Prices");
      }
+     @FXML
      public void goToMCreditCards() throws IOException{
          App.setRoot("Comisiones");
      }
+     @FXML
      public void goToSellEntrances() throws IOException{
          App.setRoot("SellEntrance");
      }
+     @FXML
      public void goToValidEntrances() throws IOException{
          App.setRoot("ValidEntrance");
      }
+     @FXML
      public void goToRateRooms() throws IOException{
          App.setRoot("RateRooms");
      }
+     @FXML
      public void goToReports() throws IOException{
          App.setRoot("Reportes");
      }

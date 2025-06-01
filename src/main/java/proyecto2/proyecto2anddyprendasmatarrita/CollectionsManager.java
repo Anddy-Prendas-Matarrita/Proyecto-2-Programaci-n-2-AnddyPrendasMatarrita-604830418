@@ -33,9 +33,9 @@ public class CollectionsManager {
     public void deleteUser(Long userId) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        MahnCollections creditCards = em.find(MahnCollections.class, userId);
-        if (creditCards != null) {
-            em.remove(creditCards);
+        MahnCollections collections = em.find(MahnCollections.class, userId);
+        if (collections != null) {
+            em.remove(collections);
         }
         em.getTransaction().commit();
         em.close();
