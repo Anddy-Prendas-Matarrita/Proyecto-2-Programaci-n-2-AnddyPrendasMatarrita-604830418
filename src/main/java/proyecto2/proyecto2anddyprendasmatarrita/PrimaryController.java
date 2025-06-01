@@ -20,7 +20,7 @@ public class PrimaryController {
          App.setRoot("Prices");
      }
      public void goToMCreditCards() throws IOException{
-         App.setRoot("CreditCards");
+         App.setRoot("Comisiones");
      }
      public void goToSellEntrances() throws IOException{
          App.setRoot("SellEntrance");
@@ -32,6 +32,6 @@ public class PrimaryController {
          App.setRoot("RateRooms");
      }
      public void goToReports() throws IOException{
-         App.setRoot("Reports");
+         App.setRoot("Reportes");
      }
 }

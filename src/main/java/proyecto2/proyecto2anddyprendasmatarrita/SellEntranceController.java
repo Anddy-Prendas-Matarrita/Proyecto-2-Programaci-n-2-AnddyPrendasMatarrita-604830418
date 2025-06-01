@@ -19,7 +19,7 @@ public class SellEntranceController {
          App.setRoot("Prices");
      }
      public void goToMCreditCards() throws IOException{
-         App.setRoot("CreditCards");
+         App.setRoot("Comisiones");
      }
      public void goToSellEntrances() throws IOException{
          App.setRoot("SellEntrance");
@@ -28,9 +28,9 @@ public class SellEntranceController {
          App.setRoot("ValidEntrance");
      }
      public void goToRateRooms() throws IOException{
-         App.setRoot("Reports");
+         App.setRoot("RateRooms");
      }
      public void goToReports() throws IOException{
-         App.setRoot("Reports");
+         App.setRoot("Reportes");
      }
 }

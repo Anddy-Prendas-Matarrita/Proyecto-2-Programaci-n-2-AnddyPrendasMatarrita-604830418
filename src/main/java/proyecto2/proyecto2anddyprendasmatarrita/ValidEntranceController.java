@@ -32,6 +32,6 @@ public class ValidEntranceController {
          App.setRoot("RateRooms");
      }
      public void goToReports() throws IOException{
-         App.setRoot("Reports");
+         App.setRoot("Reportes");
      } 
 }

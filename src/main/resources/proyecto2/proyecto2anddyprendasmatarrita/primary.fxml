@@ -11,7 +11,7 @@
    <children>
       <Pane layoutX="194.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
-            <MenuButton layoutX="42.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Reportes">
+            <MenuButton layoutX="41.0" layoutY="116.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Reportes">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
               </items>
