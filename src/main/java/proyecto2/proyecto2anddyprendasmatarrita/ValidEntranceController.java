@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 
 public class ValidEntranceController {
+    //Metodos para navegar entre pantallas
     @FXML
     public void goToMRooms() throws IOException{
          App.setRoot("Rooms");

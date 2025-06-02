@@ -17,11 +17,12 @@ public class RateRoomsController {
     private ImageView fourthStar;
     @FXML
     private ImageView fifthStar;
-    
+    //metodos para que las estrellas seleccionadas se vean visualmente
     @FXML
     public void rate1Star(){
-        Image imagen=new Image("Images/selectedStar.png");
-        Image imagen2=new Image("Images/blackStar.png");
+        Image imagen=new Image("Images/selectedStar.png"); //se crea un objeto para asinarle la imagen de estrella amarilla
+        Image imagen2=new Image("Images/blackStar.png"); //se crea un objeto para asinarle la imagen de estrella apagada\
+        //aqui se le asigna la estrella marcada dependiendo de cual selecciono el usuario, y las demas quedan apagadas
         firstStar.setImage(imagen);
         secondStar.setImage(imagen2);
         thirdStar.setImage(imagen2);
@@ -68,6 +69,7 @@ public class RateRoomsController {
         fourthStar.setImage(imagen);
         fifthStar.setImage(imagen);
     }
+    //Metodos para navegar entre pantallas
     @FXML
     public void goToMRooms() throws IOException{
          App.setRoot("Rooms");
