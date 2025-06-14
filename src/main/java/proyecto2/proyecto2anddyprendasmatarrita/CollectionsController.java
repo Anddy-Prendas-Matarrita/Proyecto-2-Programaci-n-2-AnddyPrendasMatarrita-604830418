@@ -2,9 +2,55 @@
 package proyecto2.proyecto2anddyprendasmatarrita;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class CollectionsController {
+    private CollectionsManager collectionManager=new CollectionsManager();
+    private ObservableList<MahnCollections> listaColecciones = FXCollections.observableArrayList();
+    @FXML
+    private TableView collectionsTable;
+    @FXML
+    private TableColumn<MahnCollections, String> nameColumn;
+    @FXML
+    private TableColumn<MahnCollections, BigDecimal> idColumn;
+    @FXML
+    private TableColumn<MahnCollections, String> descriptionColumn;
+    @FXML
+    private TableColumn<MahnCollections, String> roomColumn;
+    @FXML
+    private ComboBox filtroCombo;
+    @FXML
+    private TextField newName;
+    @FXML
+    private TextField newCentury;
+    @FXML
+    private TextField newDescription;
+    @FXML
+    private TextField newRoom; 
+    @FXML
+    private TextField filtroSpace;
+    public void initialize(){
+        
+    }
+    public void loadData(){
+        
+    }
+    public void showDetails(){
+        
+    }
+    public void addToDB(){
+        
+    }
+    public void delete(){
+        
+    }
     @FXML
     public void goToMRooms() throws IOException{
          App.setRoot("Rooms");

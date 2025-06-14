@@ -4,6 +4,22 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 
 public class SellEntranceController {
+    
+    public void initialize(){
+        
+    }
+    public void loadData(){
+        
+    }
+    public void showDetails(){
+        
+    }
+    public void addToDB(){
+        
+    }
+    public void delete(){
+        
+    }
     @FXML
     public void goToMRooms() throws IOException{
          App.setRoot("Rooms");

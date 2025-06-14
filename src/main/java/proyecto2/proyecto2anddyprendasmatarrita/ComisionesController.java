@@ -2,9 +2,49 @@
 package proyecto2.proyecto2anddyprendasmatarrita;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class ComisionesController {
+     private CreditCardsManager creditCardsManager=new CreditCardsManager();
+    private ObservableList<MahnCreditCards> listaCreditCards = FXCollections.observableArrayList();
+    @FXML
+    private TableView creditCardsTable;
+    @FXML
+    private TableColumn<MahnCollections, String> typeColumn;
+    @FXML
+    private TableColumn<MahnCollections, BigDecimal> idColumn;
+    @FXML
+    private TableColumn<MahnCollections, String> comisionColumn;
+    @FXML
+    private ComboBox filtroCombo;
+    @FXML
+    private TextField newNameType;
+    @FXML
+    private TextField newComsionRate;
+    @FXML
+    private TextField filtroSpace;
+    public void initialize(){
+        
+    }
+    public void loadData(){
+        
+    }
+    public void showDetails(){
+        
+    }
+    public void addToDB(){
+        
+    }
+    public void delete(){
+        
+    }
     @FXML
     public void goToMRooms() throws IOException{
          App.setRoot("Rooms");

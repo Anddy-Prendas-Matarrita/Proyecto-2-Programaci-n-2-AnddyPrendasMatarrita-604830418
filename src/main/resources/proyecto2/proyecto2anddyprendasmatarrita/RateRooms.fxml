@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -54,10 +53,9 @@
                </font>
             </Label>
             <Label layoutX="69.0" layoutY="77.0" text="ESPECIES/TEMÁTICA" />
-            <Label layoutX="253.0" layoutY="274.0" text="Desea agregar una valoración?" />
             <Pane layoutX="69.0" layoutY="94.0" prefHeight="101.0" prefWidth="109.0" style="-fx-border-color: black;">
                <children>
-                  <ImageView fitHeight="101.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="rateImage" fitHeight="101.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Label layoutX="204.0" layoutY="86.0" text="Nombre:">
@@ -110,11 +108,11 @@
                </image>
             </ImageView>
             <Button layoutX="172.0" layoutY="202.0" mnemonicParsing="false" onAction="#rate5Star" opacity="0.21" prefHeight="25.0" prefWidth="25.0" />
-            <TextField layoutX="261.0" layoutY="74.0" />
-            <TextField layoutX="267.0" layoutY="105.0" />
-            <TextField layoutX="236.0" layoutY="132.0" />
-            <TextField layoutX="253.0" layoutY="157.0" />
-            <TextArea layoutX="253.0" layoutY="291.0" prefHeight="72.0" prefWidth="232.0" />
+            <TextField fx:id="nameSpace" layoutX="261.0" layoutY="74.0" />
+            <TextField fx:id="collectionSpace" layoutX="267.0" layoutY="105.0" />
+            <TextField fx:id="typeSpace" layoutX="236.0" layoutY="132.0" />
+            <TextField fx:id="observationSpace" layoutX="248.0" layoutY="157.0" />
+            <Button layoutX="267.0" layoutY="202.0" mnemonicParsing="false" text="Valorar" />
          </children>
       </Pane>
    </children>

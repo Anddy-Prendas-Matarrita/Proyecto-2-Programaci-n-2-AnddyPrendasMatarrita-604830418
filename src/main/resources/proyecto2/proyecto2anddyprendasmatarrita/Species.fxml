@@ -47,10 +47,10 @@
               </items>
             </MenuButton>
             <ImageView fitHeight="87.0" fitWidth="97.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-            <Pane layoutX="10.0" layoutY="7.0" prefHeight="87.0" prefWidth="97.0" style="-fx-border-color: black;" />
+            <Pane fx:id="roomImage" layoutX="10.0" layoutY="7.0" prefHeight="87.0" prefWidth="97.0" style="-fx-border-color: black;" />
          </children>
       </Pane>
-      <Pane layoutX="116.0" layoutY="11.0" prefHeight="377.0" prefWidth="564.0" style="-fx-border-color: black;">
+      <Pane layoutX="116.0" layoutY="11.0" prefHeight="377.0" prefWidth="577.0" style="-fx-border-color: black;">
          <children>
             <Label layoutX="165.0" layoutY="-2.0" text="Mantenimientos">
                <font>
@@ -67,24 +67,37 @@
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <TextField layoutX="96.0" layoutY="43.0" prefHeight="25.0" prefWidth="137.0" />
-            <ComboBox layoutX="290.0" layoutY="43.0" prefHeight="25.0" prefWidth="167.0" />
+            <TextField fx:id="filtroSpace" layoutX="96.0" layoutY="43.0" prefHeight="25.0" prefWidth="137.0" />
+            <ComboBox fx:id="filtroCombo" layoutX="290.0" layoutY="43.0" prefHeight="25.0" prefWidth="167.0" />
             <Button layoutX="487.0" layoutY="43.0" mnemonicParsing="false" text="Filtrar" />
-            <TableView layoutX="3.0" layoutY="79.0" prefHeight="259.0" prefWidth="558.0">
+            <TableView fx:id="speciesTable" layoutX="3.0" layoutY="79.0" prefHeight="191.0" prefWidth="569.0">
               <columns>
-                <TableColumn prefWidth="106.0" text="Nombre científico" />
-                <TableColumn prefWidth="93.0" text="Nombre común" />
-                  <TableColumn prefWidth="98.0" text="Fecha extinción" />
-                  <TableColumn prefWidth="47.0" text="Época" />
-                  <TableColumn prefWidth="40.0" text="Peso" />
-                  <TableColumn prefWidth="52.0" text="Tamaño" />
-                  <TableColumn prefWidth="33.0" text="ID" />
-                  <TableColumn prefWidth="88.0" text="Características" />
+                <TableColumn fx:id="scientificNameColumn" prefWidth="112.0" text="Nombre científico" />
+                <TableColumn fx:id="nameColumn" prefWidth="99.0" text="Nombre común" />
+                  <TableColumn fx:id="extinctionDateColumn" prefWidth="93.0" text="Fecha extinción" />
+                  <TableColumn fx:id="eraColumn" prefWidth="50.0" text="Época" />
+                  <TableColumn fx:id="weightColumn" prefWidth="35.0" text="Peso" />
+                  <TableColumn fx:id="sizeColumn" prefWidth="53.0" text="Tamaño" />
+                  <TableColumn fx:id="idColumn" prefWidth="37.0" text="ID" />
+                  <TableColumn fx:id="featuresColumn" prefWidth="89.0" text="Características" />
               </columns>
             </TableView>
-            <Button layoutX="23.0" layoutY="338.0" mnemonicParsing="false" text="Eliminar" />
-            <Button layoutX="108.0" layoutY="338.0" mnemonicParsing="false" text="Editar" />
-            <Button layoutX="193.0" layoutY="338.0" mnemonicParsing="false" text="Insertar" />
+            <Button layoutX="481.0" layoutY="344.0" mnemonicParsing="false" text="Eliminar" />
+            <Button layoutX="399.0" layoutY="344.0" mnemonicParsing="false" text="Editar" />
+            <Button layoutX="185.0" layoutY="344.0" mnemonicParsing="false" text="Insertar" />
+            <Label layoutX="113.0" layoutY="270.0" text="Añadir especie">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="newScientificName" layoutX="14.0" layoutY="287.0" prefHeight="25.0" prefWidth="114.0" promptText="Nombre Científico" />
+            <TextField fx:id="newName" layoutX="131.0" layoutY="287.0" prefHeight="25.0" prefWidth="108.0" promptText="Nombre Común" />
+            <TextField fx:id="newExtinctionDate" layoutX="17.0" layoutY="312.0" prefHeight="25.0" prefWidth="114.0" promptText="Fecha de Extinción" />
+            <TextField fx:id="newEra" layoutX="131.0" layoutY="312.0" prefHeight="25.0" prefWidth="127.0" promptText="Época en la que vivió" />
+            <TextField fx:id="newWeight" layoutX="241.0" layoutY="287.0" prefHeight="25.0" prefWidth="67.0" promptText="Peso" />
+            <TextField fx:id="newSize" layoutX="263.0" layoutY="312.0" prefHeight="25.0" prefWidth="67.0" promptText="Tamaño" />
+            <TextField fx:id="newFeatures" layoutX="314.0" layoutY="287.0" prefHeight="25.0" prefWidth="97.0" promptText="Características" />
+            <TextField fx:id="newCollection" layoutX="332.0" layoutY="312.0" prefHeight="25.0" prefWidth="97.0" promptText="Collección" />
          </children>
       </Pane>
    </children>
