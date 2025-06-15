@@ -1,5 +1,6 @@
 package proyecto2.proyecto2anddyprendasmatarrita;
 
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -8,7 +9,7 @@ import javax.persistence.Persistence;
 public class RatingsManager {
         private EntityManagerFactory emf = Persistence.createEntityManagerFactory("user_management");
 
-    public void addUser(MahnRatings ratings) {
+    public void addRating(MahnRatings ratings) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(ratings);
@@ -16,14 +17,14 @@ public class RatingsManager {
         em.close();
     }
 
-    public List<MahnRatings> getUsers() {
+    public List<MahnRatings> getRating() {
         EntityManager em = emf.createEntityManager();
         List<MahnRatings> ratings = em.createQuery("SELECT u FROM MahnRatings u", MahnRatings.class).getResultList();
         em.close();
         return ratings;
     }
 
-    public void updateUser(MahnRatings ratings) {
+    public void updateRating(MahnRatings ratings) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.merge(ratings);
@@ -31,7 +32,7 @@ public class RatingsManager {
         em.close();
     }
 
-    public void deleteUser(Long userId) {
+    public void deleteRating(BigDecimal userId) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         MahnRatings ratings = em.find(MahnRatings.class, userId);

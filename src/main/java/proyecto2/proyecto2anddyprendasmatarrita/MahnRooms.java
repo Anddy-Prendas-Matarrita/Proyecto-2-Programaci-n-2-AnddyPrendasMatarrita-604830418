@@ -1,12 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package proyecto2.proyecto2anddyprendasmatarrita;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
+import java.util.List; 
+import java.util.HashSet;
+import java.util.Set; 
 
 /**
  *
@@ -23,7 +22,6 @@ import java.util.Collection;
 public class MahnRooms implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @javax.persistence.Id
     @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     @javax.persistence.Basic(optional = false)
@@ -37,19 +35,26 @@ public class MahnRooms implements Serializable {
     private String description;
     @javax.persistence.Column(name = "MAIN_THEME")
     private String mainTheme;
+    
     @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "roomId", fetch = javax.persistence.FetchType.EAGER)
-    private Collection<MahnCollections> mahnCollectionsCollection;
+    private Set<MahnCollections> mahnCollectionsCollection = new HashSet<>();
+    
     @javax.persistence.JoinColumn(name = "MUSEUM_ID", referencedColumnName = "MUSEUM_ID")
     @javax.persistence.ManyToOne(optional = false, fetch = javax.persistence.FetchType.EAGER)
     private MahnMuseums museumId;
+    
     @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "roomId", fetch = javax.persistence.FetchType.EAGER)
-    private Collection<MahnTopics> mahnTopicsCollection;
+    private Set<MahnTopics> mahnTopicsCollection = new HashSet<>();
+    
     @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "roomId", fetch = javax.persistence.FetchType.EAGER)
-    private Collection<MahnTicketRoom> mahnTicketRoomCollection;
+    private Set<MahnTicketRoom> mahnTicketRoomCollection = new HashSet<>();
+    
     @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "roomId", fetch = javax.persistence.FetchType.EAGER)
-    private Collection<MahnPrices> mahnPricesCollection;
+    private Set<MahnPrices> mahnPricesCollection = new HashSet<>();
+    
     @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "roomId", fetch = javax.persistence.FetchType.EAGER)
-    private Collection<MahnRatings> mahnRatingsCollection;
+    private Set<MahnRatings> mahnRatingsCollection = new HashSet<>();
+    // -----------------------------------------------------------
 
     public MahnRooms() {
     }
@@ -96,11 +101,11 @@ public class MahnRooms implements Serializable {
         this.mainTheme = mainTheme;
     }
 
-    public Collection<MahnCollections> getMahnCollectionsCollection() {
+    public Set<MahnCollections> getMahnCollectionsCollection() {
         return mahnCollectionsCollection;
     }
 
-    public void setMahnCollectionsCollection(Collection<MahnCollections> mahnCollectionsCollection) {
+    public void setMahnCollectionsCollection(Set<MahnCollections> mahnCollectionsCollection) {
         this.mahnCollectionsCollection = mahnCollectionsCollection;
     }
 
@@ -112,35 +117,35 @@ public class MahnRooms implements Serializable {
         this.museumId = museumId;
     }
 
-    public Collection<MahnTopics> getMahnTopicsCollection() {
+    public Set<MahnTopics> getMahnTopicsCollection() {
         return mahnTopicsCollection;
     }
 
-    public void setMahnTopicsCollection(Collection<MahnTopics> mahnTopicsCollection) {
+    public void setMahnTopicsCollection(Set<MahnTopics> mahnTopicsCollection) {
         this.mahnTopicsCollection = mahnTopicsCollection;
     }
 
-    public Collection<MahnTicketRoom> getMahnTicketRoomCollection() {
+    public Set<MahnTicketRoom> getMahnTicketRoomCollection() {
         return mahnTicketRoomCollection;
     }
 
-    public void setMahnTicketRoomCollection(Collection<MahnTicketRoom> mahnTicketRoomCollection) {
+    public void setMahnTicketRoomCollection(Set<MahnTicketRoom> mahnTicketRoomCollection) {
         this.mahnTicketRoomCollection = mahnTicketRoomCollection;
     }
 
-    public Collection<MahnPrices> getMahnPricesCollection() {
+    public Set<MahnPrices> getMahnPricesCollection() { 
         return mahnPricesCollection;
     }
 
-    public void setMahnPricesCollection(Collection<MahnPrices> mahnPricesCollection) {
+    public void setMahnPricesCollection(Set<MahnPrices> mahnPricesCollection) {
         this.mahnPricesCollection = mahnPricesCollection;
     }
 
-    public Collection<MahnRatings> getMahnRatingsCollection() {
+    public Set<MahnRatings> getMahnRatingsCollection() {
         return mahnRatingsCollection;
     }
 
-    public void setMahnRatingsCollection(Collection<MahnRatings> mahnRatingsCollection) {
+    public void setMahnRatingsCollection(Set<MahnRatings> mahnRatingsCollection) {
         this.mahnRatingsCollection = mahnRatingsCollection;
     }
 
@@ -153,7 +158,6 @@ public class MahnRooms implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof MahnRooms)) {
             return false;
         }

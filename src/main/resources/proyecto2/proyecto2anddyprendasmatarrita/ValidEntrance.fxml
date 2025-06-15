@@ -22,6 +22,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#goToMTopics" text="Temáticas" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMPrices" text="Precios" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMCreditCards" text="Comisiones" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMMuseums" text="Museo" />
               </items>
                <font>
                   <Font size="10.0" />

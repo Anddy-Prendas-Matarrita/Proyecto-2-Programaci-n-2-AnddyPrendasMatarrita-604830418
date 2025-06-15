@@ -1,5 +1,6 @@
 package proyecto2.proyecto2anddyprendasmatarrita;
 
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -8,7 +9,7 @@ import javax.persistence.Persistence;
 public class CreditCardsManager {
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("user_management");
 
-    public void addUser(MahnCreditCards creditCards) {
+    public void addCreditCard(MahnCreditCards creditCards) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(creditCards);
@@ -23,7 +24,7 @@ public class CreditCardsManager {
         return creditCards;
     }
 
-    public void updateUser(MahnCreditCards creditCards) {
+    public void updateCreditCard(MahnCreditCards creditCards) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.merge(creditCards);
@@ -31,7 +32,7 @@ public class CreditCardsManager {
         em.close();
     }
 
-    public void deleteUser(Long userId) {
+    public void deleteCreditCard(BigDecimal userId) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         MahnCreditCards creditCards = em.find(MahnCreditCards.class, userId);

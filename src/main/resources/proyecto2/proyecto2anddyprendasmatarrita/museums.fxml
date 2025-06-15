@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.proyecto2anddyprendasmatarrita.PricesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.proyecto2anddyprendasmatarrita.MuseumsController">
     <children>
-        <Pane layoutX="9.0" layoutY="11.0" prefHeight="377.0" prefWidth="143.0" style="-fx-border-color: black;">
+        <Pane layoutX="2.0" layoutY="11.0" prefHeight="377.0" prefWidth="125.0" style="-fx-border-color: black;">
             <children>
-                <MenuButton layoutX="12.0" layoutY="162.0" mnemonicParsing="false" text="Mantenimientos">
+                <MenuButton layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" text="Mantenimientos">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
                         <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
@@ -28,26 +28,26 @@
                   <MenuItem mnemonicParsing="false" onAction="#goToMMuseums" text="Museos" />
                     </items>
                 </MenuButton>
-                <MenuButton layoutX="12.0" layoutY="187.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Entradas">
+                <MenuButton layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Entradas">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
                         <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
                     </items>
                 </MenuButton>
-                <MenuButton layoutX="12.0" layoutY="212.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Valoración">
+                <MenuButton layoutY="214.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Valoración">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
                     </items>
                 </MenuButton>
-                <MenuButton layoutX="12.0" layoutY="237.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Reportes">
+                <MenuButton layoutY="239.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Reportes">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
                     </items>
                 </MenuButton>
-                <ImageView fitHeight="140.0" fitWidth="152.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="museumImage" fitHeight="102.0" fitWidth="112.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </Pane>
-        <Pane layoutX="152.0" layoutY="11.0" prefHeight="377.0" prefWidth="435.0" style="-fx-border-color: black;">
+        <Pane layoutX="126.0" layoutY="11.0" prefHeight="377.0" prefWidth="461.0" style="-fx-border-color: black;">
             <children>
                 <Label layoutX="97.0" layoutY="-2.0" text="Mantenimientos">
                     <font>
@@ -64,28 +64,34 @@
                         <Font name="System Bold Italic" size="12.0" />
                     </font>
                 </Label>
-                <TextField fx:id="filtroSpace" layoutX="59.0" layoutY="43.0" prefHeight="25.0" prefWidth="97.0" promptText="Filtrar por Sala (texto)" />
+                <TextField fx:id="filtroSpace" layoutX="59.0" layoutY="43.0" prefHeight="25.0" prefWidth="97.0" />
                 <ComboBox fx:id="filtroCombo" layoutX="206.0" layoutY="43.0" prefHeight="25.0" prefWidth="118.0" />
                 <Button layoutX="338.0" layoutY="43.0" mnemonicParsing="false" onAction="#filterData" text="Filtrar" />
-                <TableView fx:id="pricesTable" layoutX="8.0" layoutY="84.0" prefHeight="112.0" prefWidth="422.0">
+                <TableView fx:id="museumsTable" layoutX="3.0" layoutY="84.0" prefHeight="138.0" prefWidth="455.0">
                     <columns>
-                        <TableColumn fx:id="weekPriceColumn" prefWidth="150.0" text="Precio de lunes a sábado" />
-                        <TableColumn fx:id="sundayPriceColumn" prefWidth="119.0" text="Precio domingos" />
-                        <TableColumn fx:id="roomColumn" prefWidth="87.0" text="Sala" />
-                        <TableColumn fx:id="idColumn" prefWidth="65.0" text="ID" />
+                        <TableColumn fx:id="nameColumn" prefWidth="64.0" text="Nombre" />
+                        <TableColumn fx:id="typeColumn" prefWidth="56.0" text="Tipo" />
+                        <TableColumn fx:id="locationColumn" prefWidth="101.0" text="Lugar" />
+                        <TableColumn fx:id="idColumn" prefWidth="41.0" text="ID" />
+                  <TableColumn fx:id="fundationDateColumn" prefWidth="71.0" text="Fundación" />
+                  <TableColumn fx:id="directorColumn" prefWidth="60.0" text="Director" />
+                  <TableColumn fx:id="websiteColumn" prefWidth="61.0" text="Página" />
                     </columns>
                 </TableView>
-                <Button layoutX="23.0" layoutY="338.0" mnemonicParsing="false" onAction="#delete" text="Eliminar" />
-                <Button layoutX="108.0" layoutY="338.0" mnemonicParsing="false" onAction="#updateInDB" text="Editar" />
+                <Button layoutX="122.0" layoutY="338.0" mnemonicParsing="false" onAction="#delete" text="Eliminar" />
+                <Button layoutX="218.0" layoutY="338.0" mnemonicParsing="false" onAction="#updateInDB" text="Editar" />
                 <Button layoutX="310.0" layoutY="338.0" mnemonicParsing="false" onAction="#addToDB" text="Insertar" />
-                <Label layoutX="286.0" layoutY="248.0" text="Añadir/Editar Precio">
+                <Label layoutX="275.0" layoutY="229.0" text="Añadir o editar museo">
                     <font>
                         <Font name="System Bold Italic" size="12.0" />
                     </font>
                 </Label>
-                <TextField fx:id="newWeekPrice" layoutX="195.0" layoutY="273.0" prefHeight="25.0" prefWidth="126.0" promptText="Precio entre semana" />
-                <TextField fx:id="newSundayPrice" layoutX="324.0" layoutY="273.0" prefHeight="25.0" prefWidth="106.0" promptText="Precio domingos" />
-                <TextField fx:id="newRoom" layoutX="289.0" layoutY="304.0" prefHeight="25.0" prefWidth="97.0" promptText="Nombre de la sala" />
+                <TextField fx:id="newName" layoutX="202.0" layoutY="246.0" prefHeight="25.0" prefWidth="126.0" promptText="Nombre" />
+                <TextField fx:id="newType" layoutX="331.0" layoutY="246.0" prefHeight="25.0" prefWidth="106.0" promptText="Tipo" />
+                <TextField fx:id="newLocation" layoutX="203.0" layoutY="271.0" prefHeight="17.0" prefWidth="97.0" promptText="Localización" />
+            <TextField fx:id="newFundationDate" layoutX="300.0" layoutY="271.0" prefHeight="25.0" prefWidth="106.0" promptText="FundaciónFecha" />
+            <TextField fx:id="newDirector" layoutX="206.0" layoutY="296.0" prefHeight="25.0" prefWidth="106.0" promptText="Director" />
+            <TextField fx:id="newWebsite" layoutX="308.0" layoutY="296.0" prefHeight="25.0" prefWidth="106.0" promptText="PaǵinaWeb" />
             </children>
         </Pane>
     </children>

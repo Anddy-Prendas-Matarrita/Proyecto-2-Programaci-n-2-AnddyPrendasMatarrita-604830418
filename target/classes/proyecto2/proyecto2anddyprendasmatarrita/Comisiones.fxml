@@ -63,19 +63,26 @@
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <TextField layoutX="59.0" layoutY="43.0" prefHeight="25.0" prefWidth="97.0" />
-            <ComboBox layoutX="206.0" layoutY="43.0" prefHeight="25.0" prefWidth="118.0" />
+            <TextField fx:id="filtroSpace" layoutX="59.0" layoutY="43.0" prefHeight="25.0" prefWidth="97.0" />
+            <ComboBox fx:id="filtroCombo" layoutX="206.0" layoutY="43.0" prefHeight="25.0" prefWidth="118.0" />
             <Button layoutX="338.0" layoutY="43.0" mnemonicParsing="false" text="Filtrar" />
-            <TableView layoutX="14.0" layoutY="84.0" prefHeight="252.0" prefWidth="385.0">
+            <TableView fx:id="creditCardsTable" layoutX="14.0" layoutY="84.0" prefHeight="181.0" prefWidth="385.0">
               <columns>
-                <TableColumn prefWidth="170.0" text="Tipo de tarjeta" />
-                <TableColumn prefWidth="110.0" text="Comisión cobrada" />
-                  <TableColumn prefWidth="104.0" text="ID" />
+                <TableColumn fx:id="typeColumn" prefWidth="170.0" text="Tipo de tarjeta" />
+                <TableColumn fx:id="comisionColumn" prefWidth="110.0" text="Comisión cobrada" />
+                  <TableColumn fx:id="idColumn" prefWidth="104.0" text="ID" />
               </columns>
             </TableView>
             <Button layoutX="23.0" layoutY="338.0" mnemonicParsing="false" text="Eliminar" />
-            <Button layoutX="108.0" layoutY="338.0" mnemonicParsing="false" text="Editar" />
-            <Button layoutX="196.0" layoutY="338.0" mnemonicParsing="false" text="Insertar" />
+            <Button layoutX="167.0" layoutY="338.0" mnemonicParsing="false" text="Editar" />
+            <Button layoutX="324.0" layoutY="338.0" mnemonicParsing="false" text="Insertar" />
+            <TextField fx:id="newNameType" layoutX="190.0" layoutY="300.0" prefHeight="25.0" prefWidth="97.0" promptText="Nombre" />
+            <Label layoutX="239.0" layoutY="277.0" text="Añadir tipo de  tarjeta">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="newComisionRate" layoutX="288.0" layoutY="300.0" prefHeight="25.0" prefWidth="109.0" promptText="Comisión cobrada" />
          </children>
       </Pane>
    </children>

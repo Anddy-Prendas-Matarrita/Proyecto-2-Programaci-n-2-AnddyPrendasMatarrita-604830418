@@ -1,6 +1,7 @@
 
 package proyecto2.proyecto2anddyprendasmatarrita;
 
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,7 +10,7 @@ import javax.persistence.Persistence;
 public class TopicsManager {
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("user_management");
 
-    public void addUser(MahnTopics topics) {
+    public void addTopic(MahnTopics topics) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(topics);
@@ -17,14 +18,14 @@ public class TopicsManager {
         em.close();
     }
 
-    public List<MahnTopics> getUsers() {
+    public List<MahnTopics> getTopic() {
         EntityManager em = emf.createEntityManager();
         List<MahnTopics> topics = em.createQuery("SELECT u FROM MahnTopics u", MahnTopics.class).getResultList();
         em.close();
         return topics;
     }
 
-    public void updateUser(MahnTopics topics) {
+    public void updateTopic(MahnTopics topics) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.merge(topics);
@@ -32,7 +33,7 @@ public class TopicsManager {
         em.close();
     }
 
-    public void deleteUser(Long userId) {
+    public void deleteTopic(BigDecimal userId) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         MahnTopics topics = em.find(MahnTopics.class, userId);

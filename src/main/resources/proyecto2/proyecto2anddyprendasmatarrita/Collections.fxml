@@ -25,6 +25,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#goToMTopics" text="Temáticas" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMPrices" text="Precios" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMCreditCards" text="Comisiones" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMMuseums" text="Museos" />
               </items>
             </MenuButton>
             <MenuButton layoutX="9.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Entradas">

@@ -12,10 +12,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="411.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.proyecto2anddyprendasmatarrita.SellEntranceController">
    <children>
-      <Pane layoutX="2.0" layoutY="11.0" prefHeight="377.0" prefWidth="108.0" style="-fx-border-color: black;">
+      <Pane layoutX="2.0" layoutY="11.0" prefHeight="377.0" prefWidth="115.0" style="-fx-border-color: black;">
          <children>
             <MenuButton layoutX="2.0" layoutY="159.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="108.0" text="Mantenimientos">
               <items>
@@ -49,7 +50,7 @@
             <ImageView fitHeight="87.0" fitWidth="97.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Pane layoutX="110.0" layoutY="11.0" prefHeight="377.0" prefWidth="570.0" style="-fx-border-color: black;">
+      <Pane layoutX="115.0" layoutY="11.0" prefHeight="377.0" prefWidth="579.0" style="-fx-border-color: black;">
          <children>
             <Label layoutX="178.0" layoutY="-2.0" text="Vender Entradas">
                <font>
@@ -66,8 +67,8 @@
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <TextField layoutX="131.0" layoutY="43.0" prefHeight="25.0" prefWidth="137.0" />
-            <ComboBox layoutX="366.0" layoutY="43.0" prefHeight="25.0" prefWidth="167.0" />
+            <TextField fx:id="visitorSpace" layoutX="131.0" layoutY="43.0" prefHeight="25.0" prefWidth="137.0" />
+            <ComboBox fx:id="creditCardSpace" layoutX="366.0" layoutY="43.0" prefHeight="25.0" prefWidth="167.0" />
             <Button layoutX="431.0" layoutY="86.0" mnemonicParsing="false" text="Agregar" />
             <Button layoutX="472.0" layoutY="338.0" mnemonicParsing="false" text="Vender" />
             <Label layoutX="23.0" layoutY="90.0" prefHeight="17.0" prefWidth="46.0" text="Museo:">
@@ -75,23 +76,27 @@
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <ComboBox layoutX="63.0" layoutY="86.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="museumSpace" layoutX="63.0" layoutY="86.0" prefHeight="25.0" prefWidth="167.0" />
             <Label layoutX="249.0" layoutY="90.0" prefHeight="17.0" prefWidth="46.0" text="Fecha:">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <TextField layoutX="292.0" layoutY="86.0" prefHeight="25.0" prefWidth="108.0" />
-            <TableView layoutX="57.0" layoutY="129.0" prefHeight="161.0" prefWidth="415.0">
+            <TextField fx:id="dateSpace" layoutX="292.0" layoutY="86.0" prefHeight="25.0" prefWidth="108.0" />
+            <TableView layoutX="12.0" layoutY="163.0" prefHeight="161.0" prefWidth="553.0">
               <columns>
-                <TableColumn prefWidth="139.0" text="Museo" />
-                <TableColumn prefWidth="121.0" text="Fecha de visita" />
-                  <TableColumn prefWidth="153.0" text="Precio" />
+                <TableColumn fx:id="museumColumn" prefWidth="139.0" text="Museo" />
+                <TableColumn fx:id="visitDateColumn" prefWidth="121.0" text="Fecha de visita" />
+                  <TableColumn fx:id="priceColumn" prefWidth="153.0" text="Precio" />
+                  <TableColumn fx:id="priceColumn1" prefWidth="153.0" text="Precio" />
               </columns>
             </TableView>
-            <Label layoutX="23.0" layoutY="321.0" prefHeight="17.0" prefWidth="54.0" text="Subtotal:" />
-            <Label layoutX="23.0" layoutY="342.0" prefHeight="17.0" prefWidth="54.0" text="IVA:" />
-            <Label layoutX="159.0" layoutY="321.0" prefHeight="17.0" prefWidth="90.0" text="TOTAL A PAGAR:" />
+            <Label layoutX="23.0" layoutY="330.0" prefHeight="17.0" prefWidth="54.0" text="Subtotal:" />
+            <Label layoutX="23.0" layoutY="355.0" prefHeight="17.0" prefWidth="54.0" text="IVA:" />
+            <Label layoutX="147.0" layoutY="339.0" prefHeight="17.0" prefWidth="90.0" text="TOTAL A PAGAR:" />
+            <Text fx:id="entrancePrice" layoutX="77.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="comisionPrice" layoutX="50.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="totalPrice" layoutX="246.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
          </children>
       </Pane>
    </children>

@@ -1,6 +1,7 @@
 
 package proyecto2.proyecto2anddyprendasmatarrita;
 
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,7 +10,7 @@ import javax.persistence.Persistence;
 public class TicketsManager {
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("user_management");
 
-    public void addUser(MahnTickets tickets) {
+    public void addTickets(MahnTickets tickets) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(tickets);
@@ -17,14 +18,14 @@ public class TicketsManager {
         em.close();
     }
 
-    public List<MahnTickets> getUsers() {
+    public List<MahnTickets> getTickets() {
         EntityManager em = emf.createEntityManager();
         List<MahnTickets> tickets = em.createQuery("SELECT u FROM MahnTickets u", MahnTickets.class).getResultList();
         em.close();
         return tickets;
     }
 
-    public void updateUser(MahnTickets tickets) {
+    public void updateTickets(MahnTickets tickets) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.merge(tickets);
@@ -32,7 +33,7 @@ public class TicketsManager {
         em.close();
     }
 
-    public void deleteUser(Long userId) {
+    public void deleteTickets(BigDecimal userId) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         MahnTickets tickets = em.find(MahnTickets.class, userId);

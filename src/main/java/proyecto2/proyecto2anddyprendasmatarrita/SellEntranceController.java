@@ -60,4 +60,8 @@ public class SellEntranceController {
      public void goToReports() throws IOException{
          App.setRoot("Reportes");
      }
+     @FXML
+      public void goToMMuseums() throws IOException{
+          App.setRoot("Museums");
+      }
 }
