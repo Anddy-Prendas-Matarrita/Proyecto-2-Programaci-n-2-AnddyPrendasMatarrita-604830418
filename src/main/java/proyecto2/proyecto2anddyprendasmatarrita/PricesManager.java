@@ -28,31 +28,6 @@ public class PricesManager {
         em.close();
         return prices;
     }
-    public MahnPrices getPriceByRoomId(BigDecimal roomId) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<MahnPrices> query = em.createQuery("SELECT p FROM MahnPrices p WHERE p.roomId.roomId = :roomId", MahnPrices.class);
-            query.setParameter("roomId", roomId);
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        } finally {
-            em.close();
-        }
-    }
-    public BigDecimal getPriceForRoomAndDate(BigDecimal roomId, LocalDate date) {
-        MahnPrices priceEntity = getPriceByRoomId(roomId);
-        if (priceEntity == null) {
-            return null; // No se encontró precio para esta sala
-        }
-
-        DayOfWeek dayOfWeek = date.getDayOfWeek();
-        if (dayOfWeek == DayOfWeek.SUNDAY) {
-            return priceEntity.getSundayPrice();
-        } else {
-            return priceEntity.getWeekdayPrice();
-        }
-    }
     public List<MahnPrices> getAllPrices() {
         EntityManager em = emf.createEntityManager();
         List<MahnPrices> prices = em.createQuery("SELECT p FROM MahnPrices p", MahnPrices.class).getResultList();
@@ -77,6 +52,47 @@ public class PricesManager {
         }
         em.getTransaction().commit();
         em.close();
+    }
+    public MahnPrices getPriceByRoomId(BigDecimal roomId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            System.out.println("PricesManager: Buscando precio para roomId: " + roomId);
+            TypedQuery<MahnPrices> query = em.createQuery("SELECT p FROM MahnPrices p WHERE p.roomId.roomId = :roomId", MahnPrices.class);
+            query.setParameter("roomId", roomId);
+            MahnPrices result = query.getSingleResult();
+            System.out.println("PricesManager: Resultado de getPriceByRoomId: " + (result != null ? "Encontrado" : "No encontrado"));
+            return result;
+        } catch (NoResultException e) {
+            System.out.println("PricesManager: NoResultException para roomId: " + roomId);
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+    
+    public BigDecimal getPriceForRoomAndDate(BigDecimal roomId, LocalDate date) {
+        System.out.println("PricesManager: getPriceForRoomAndDate llamado con roomId: " + roomId + ", fecha: " + date);
+        MahnPrices priceEntity = getPriceByRoomId(roomId);
+        if (priceEntity == null) {
+            System.out.println("PricesManager: priceEntity es null para roomId: " + roomId); 
+            return null; 
+        }
+
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+        BigDecimal price = null;
+        if (dayOfWeek == DayOfWeek.SUNDAY) {
+            price = priceEntity.getSundayPrice();
+            System.out.println("PricesManager: Es domingo, precio: " + price); 
+        } else {
+            price = priceEntity.getWeekdayPrice();
+            System.out.println("PricesManager: Es día de semana, precio: " + price); 
+        }
+ 
+        if (price == null) {
+            System.out.println("PricesManager: El precio (weekday/sunday) es nulo para roomId: " + roomId); 
+        }
+        
+        return price;
     }
 
     public List<MahnPrices> filterPricesByRoomName(String roomName) {

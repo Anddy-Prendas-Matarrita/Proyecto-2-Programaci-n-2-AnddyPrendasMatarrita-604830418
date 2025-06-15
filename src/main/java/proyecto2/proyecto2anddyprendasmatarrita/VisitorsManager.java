@@ -1,3 +1,4 @@
+
 package proyecto2.proyecto2anddyprendasmatarrita;
 
 import java.math.BigDecimal;
@@ -11,23 +12,26 @@ import javax.persistence.TypedQuery;
 public class VisitorsManager {
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("user_management");
 
-    public void addVisitor(MahnVisitors visitor) {
+    public void addVisitor(MahnVisitors visitors) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(visitor);
+        em.persist(visitors);
         em.getTransaction().commit();
         em.close();
     }
 
+    public List<MahnVisitors> getVisitor() {
+        EntityManager em = emf.createEntityManager();
+        List<MahnVisitors> visitors = em.createQuery("SELECT u FROM MahnVisitors u", MahnVisitors.class).getResultList();
+        em.close();
+        return visitors;
+    }
     public MahnVisitors findVisitorByEmail(String email) {
         EntityManager em = emf.createEntityManager();
         try {
-            // Asegúrate de tener un NamedQuery o crea la consulta directamente si no existe.
-            // Por ejemplo, añade esto en MahnVisitors.java:
-            // @NamedQuery(name = "MahnVisitors.findByEmail", query = "SELECT m FROM MahnVisitors m WHERE m.email = :email")
-            TypedQuery<MahnVisitors> query = em.createNamedQuery("MahnVisitors.findByEmail", MahnVisitors.class);
+            TypedQuery<MahnVisitors> query = em.createQuery("SELECT v FROM MahnVisitors v WHERE v.email = :email", MahnVisitors.class);
             query.setParameter("email", email);
-            return query.getSingleResult();
+            return query.getSingleResult(); 
         } catch (NoResultException e) {
             return null;
         } finally {
@@ -35,24 +39,28 @@ public class VisitorsManager {
         }
     }
 
-    public void updateVisitor(MahnVisitors visitor) {
+    public void updateVisitor(MahnVisitors visitors) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.merge(visitor);
+        em.merge(visitors);
         em.getTransaction().commit();
         em.close();
     }
 
-    public List<MahnVisitors> getVisitors() {
+    public void deleteVisitor(BigDecimal userId) {
         EntityManager em = emf.createEntityManager();
-        List<MahnVisitors> visitors = em.createQuery("SELECT v FROM MahnVisitors v", MahnVisitors.class).getResultList();
+        em.getTransaction().begin();
+        MahnVisitors visitors = em.find(MahnVisitors.class, userId);
+        if (visitors != null) {
+            em.remove(visitors);
+        }
+        em.getTransaction().commit();
         em.close();
-        return visitors;
     }
-    
+
     public void close() {
         if (emf != null && emf.isOpen()) {
             emf.close();
         }
-    }
+    } 
 }

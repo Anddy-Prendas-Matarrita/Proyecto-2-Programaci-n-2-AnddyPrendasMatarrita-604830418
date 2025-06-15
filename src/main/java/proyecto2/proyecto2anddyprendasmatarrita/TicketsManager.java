@@ -1,6 +1,6 @@
 package proyecto2.proyecto2anddyprendasmatarrita;
 
-import java.math.BigDecimal; // Asegúrate de importar BigDecimal
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,8 +25,7 @@ public class TicketsManager {
         em.close();
         return tickets;
     }
-
-     public MahnTickets getTicketByQrCode(String qrCode) {
+    public MahnTickets getTicketByQrCode(String qrCode) {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<MahnTickets> query = em.createQuery("SELECT t FROM MahnTickets t WHERE t.qrCode = :qrCode", MahnTickets.class);

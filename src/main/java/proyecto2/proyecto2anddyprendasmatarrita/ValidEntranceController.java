@@ -14,13 +14,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
-import java.math.BigDecimal; // Necesario si MahnTickets.ticketId sigue siendo BigDecimal
+import java.math.BigDecimal; 
 
 public class ValidEntranceController {
-
-    // --- Elementos de la interfaz FXML ---
     @FXML
-    private TextField validationCodeInput; // Cambiado de ticketIdField
+    private TextField validationCodeInput; 
     @FXML
     private Button validateButton;
     @FXML
@@ -42,7 +40,6 @@ public class ValidEntranceController {
     @FXML
     private Text enjoyMessageText;
 
-    // --- Managers para la base de datos ---
     private TicketsManager ticketsManager = new TicketsManager();
     private TicketRoomManager ticketRoomManager = new TicketRoomManager();
 
@@ -60,7 +57,6 @@ public class ValidEntranceController {
         accessRoomsTableView.setVisible(false);
         enjoyMessageText.setVisible(false);
     }
-
 
     private void configureAccessRoomsTableView() {
         accessRoomNameColumn.setCellValueFactory(cellData -> {
@@ -81,9 +77,7 @@ public class ValidEntranceController {
 
     @FXML
     private void handleValidateTicket() {
-        String validationCode = validationCodeInput.getText(); // Obtener el código del campo
-        
-        // Reiniciar estado visual
+        String validationCode = validationCodeInput.getText();
         statusLabel.setText("");
         qrImageView.setImage(null);
         qrImageView.setVisible(false);
@@ -100,8 +94,8 @@ public class ValidEntranceController {
         }
 
         try {
-            // Buscar el ticket por el código QR (que ahora es nuestro código de validación)
-            MahnTickets ticket = ticketsManager.getTicketByQrCode(validationCode); // Este método ya existía, lo reutilizamos
+            //intenta buscar el codigo para dar acceso al qr
+            MahnTickets ticket = ticketsManager.getTicketByQrCode(validationCode); 
 
             if (ticket == null) {
                 showAlert(AlertType.ERROR, "Error de Validación", "Ticket no encontrado", "No existe ninguna venta con el Código de Validación proporcionado.");
@@ -109,7 +103,7 @@ public class ValidEntranceController {
                 return;
             }
 
-            // Verificar la fecha de visita para las salas del ticket
+            // se verifica la fecha de visita para las salas del ticket
             boolean isValidForToday = false;
             if (ticket.getMahnTicketRoomCollection() != null) {
                  for (MahnTicketRoom ticketRoom : ticket.getMahnTicketRoomCollection()) {
@@ -126,12 +120,11 @@ public class ValidEntranceController {
                 statusLabel.setText("Ticket no válido para hoy.");
                 return;
             }
-            
-            // Si el ticket es válido para hoy, mostrar el ImageView y el botón "Ver"
-            qrImageView.setVisible(true); // El ImageView estará vacío por ahora, como solicitado
+
+            qrImageView.setVisible(true); 
             showDetailsButton.setVisible(true);
             statusLabel.setText("Ticket válido. Haga clic en 'Ver Salas' para más detalles.");
-            currentTicket = ticket; // Almacenar el ticket validado para el botón "Ver"
+            currentTicket = ticket; 
 
         } catch (Exception e) {
             showAlert(AlertType.ERROR, "Error de Validación", "Error al validar ticket", "Ocurrió un error al procesar la validación: " + e.getMessage());
@@ -147,10 +140,9 @@ public class ValidEntranceController {
             return;
         }
         
-        accessibleRoomsData.clear(); // Limpiar datos anteriores
+        accessibleRoomsData.clear();
         if (currentTicket.getMahnTicketRoomCollection() != null) {
             for (MahnTicketRoom ticketRoom : currentTicket.getMahnTicketRoomCollection()) {
-                // Solo añadir salas cuya fecha de visita sea hoy
                 LocalDate visitDate = new java.sql.Date(ticketRoom.getVisitDate().getTime()).toLocalDate();
                 if (visitDate.isEqual(LocalDate.now())) {
                      accessibleRoomsData.add(new Object[]{ticketRoom.getRoomId(), visitDate});
@@ -175,8 +167,6 @@ public class ValidEntranceController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-
-    // --- Métodos de navegación ---
     @FXML
     public void goToMRooms() throws IOException{ App.setRoot("Rooms"); }
     @FXML

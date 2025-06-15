@@ -21,12 +21,11 @@ import java.util.List;
 import java.util.Date; 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.PasswordField; // Importar PasswordField
+import javafx.scene.control.PasswordField;
 
 
 public class SellEntranceController {
 
-    // --- Elementos de la interfaz FXML ---
     @FXML
     private TextField visitorNameField;
     @FXML
@@ -44,7 +43,7 @@ public class SellEntranceController {
     @FXML
     private Button sellButton;
     @FXML
-    private PasswordField validationCodeField; // Nuevo: Campo para el código de validación/contraseña
+    private PasswordField validationCodeField; 
 
     @FXML
     private TableView<Object[]> roomsTableView; 
@@ -67,7 +66,6 @@ public class SellEntranceController {
     @FXML
     private Label statusLabel; 
 
-    // --- Managers para la base de datos ---
     private VisitorsManager visitorsManager = new VisitorsManager();
     private CreditCardsManager creditCardsManager = new CreditCardsManager();
     private RoomsManager roomsManager = new RoomsManager();
@@ -99,7 +97,6 @@ public class SellEntranceController {
         ivaText.setText(String.format("%.2f", BigDecimal.ZERO));
         totalToPayText.setText(String.format("%.2f", BigDecimal.ZERO));
     }
-
     private void configureRoomsTableView() {
         roomNameColumn.setCellValueFactory(cellData -> {
             MahnRooms room = (MahnRooms) cellData.getValue()[0]; 
@@ -122,6 +119,7 @@ public class SellEntranceController {
         roomsTableView.setItems(selectedRooms);
     }
 
+
     private void loadCreditCardTypes() {
         try {
             List<MahnCreditCards> cards = creditCardsManager.getAllCreditCards();
@@ -136,7 +134,6 @@ public class SellEntranceController {
         }
     }
     
- 
     private void loadAllRooms() {
         try {
             List<MahnRooms> allRooms = roomsManager.getAllRooms(); 
@@ -162,10 +159,6 @@ public class SellEntranceController {
         }
     }
 
-
-    /**
-     * Maneja la acción del botón "Agregar" para añadir una sala a la lista de compra.
-     */
     @FXML
     private void handleAddRoom() {
         String dateText = visitDateField.getText();
@@ -218,23 +211,20 @@ public class SellEntranceController {
         }
     }
 
-
-  
     @FXML
     private void handleSell() {
         String visitorName = visitorNameField.getText();
         String visitorEmail = visitorEmailField.getText();
         String visitorPhone = visitorPhoneField.getText();
         String creditCardType = creditCardSpace.getValue();
-        String validationCode = validationCodeField.getText(); // Nuevo: Obtener el código de validación
+        String validationCode = validationCodeField.getText();
 
-        if (visitorName.isEmpty() || visitorEmail.isEmpty() || selectedRooms.isEmpty() || creditCardType == null || validationCode.isEmpty()) { // Validar el nuevo campo
-            showAlert(AlertType.WARNING, "Advertencia", "Campos Requeridos", "Por favor, complete todos los campos (incluyendo el Código de Validación), seleccione un tipo de tarjeta y al menos una sala.");
+        if (visitorName.isEmpty() || visitorEmail.isEmpty() || selectedRooms.isEmpty() || creditCardType == null || validationCode.isEmpty()) { 
+            showAlert(AlertType.WARNING, "Advertencia", "Campos Requeridos", "omplete todos los campos (incluyendo el Código de Validación), seleccione un tipo de tarjeta y al menos una sala.");
             return;
         }
 
         try {
-            // 2. Gestionar el Visitante (buscar o crear)
             MahnVisitors visitor = visitorsManager.findVisitorByEmail(visitorEmail);
             if (visitor == null) {
                 visitor = new MahnVisitors();
@@ -247,30 +237,24 @@ public class SellEntranceController {
                 visitor.setPhone(visitorPhone);
                 visitorsManager.updateVisitor(visitor);
             }
-            
-            // 3. Obtener la tarjeta de crédito seleccionada
+
             MahnCreditCards selectedCard = creditCardsManager.getCreditCardByType(creditCardType);
             if (selectedCard == null) {
-                showAlert(AlertType.ERROR, "Error", "Tarjeta inválida", "Tipo de tarjeta de crédito no encontrado. Por favor, verifique la configuración de tarjetas.");
+                showAlert(AlertType.ERROR, "Error", "Tarjeta inválida", "Tipo de tarjeta de crédito no encontrado. Por favor, verifique la configuración de tarjetas");
                 return;
             }
-
-            // 4. Calcular el total
             BigDecimal finalTotal = new BigDecimal(totalToPayText.getText());
             BigDecimal ivaAmount = new BigDecimal(ivaText.getText()); 
-
-            // 5. Crear MahnTickets
             MahnTickets newTicket = new MahnTickets();
             newTicket.setVisitorId(visitor);
             newTicket.setPurchaseDate(new Date()); 
             newTicket.setCardId(selectedCard);
             newTicket.setTotalAmount(finalTotal);
             newTicket.setCommissionAmount(ivaAmount); 
-            newTicket.setQrCode(validationCode); // Asignar el código de validación al campo qrCode
+            newTicket.setQrCode(validationCode);
 
             ticketsManager.addTickets(newTicket);
 
-            // 7. Crear MahnTicketRoom para cada sala seleccionada
             for (Object[] roomDataArray : selectedRooms) { 
                 MahnRooms actualRoom = (MahnRooms) roomDataArray[0]; 
                 LocalDate visitDate = (LocalDate) roomDataArray[1]; 
@@ -282,21 +266,20 @@ public class SellEntranceController {
                 ticketRoomManager.addTicketRoom(ticketRoom);
             }
 
-            // Aquí mostramos el ID del ticket Y el código de validación
             showAlert(AlertType.INFORMATION, "Venta Exitosa", "Ticket Generado", 
                       "Venta realizada con éxito! \nID del Ticket: " + newTicket.getTicketId() + 
-                      "\nCódigo de Validación: " + newTicket.getQrCode() + // Mostrar el código al usuario
+                      "\nCódigo de Validación: " + newTicket.getQrCode() + 
                       "\nSubtotal: " + subtotalText.getText() + 
                       "\nIVA: " + ivaText.getText() + 
                       "\nTotal: " + totalToPayText.getText());
             clearForm();
 
         } catch (Exception e) {
-            showAlert(AlertType.ERROR, "Error de Venta", "No se pudo completar la venta", "Ocurrió un error al procesar la venta: " + e.getMessage());
+            showAlert(AlertType.ERROR, "Error de Venta", "No se pudo completar la venta", "Ocurrio un error al procesar la venta: " + e.getMessage());
         }
     }
-    
-    private void calculateTotals() {
+
+    private void calculateTotals() {//Aqui se calcula el total a pagar
         BigDecimal subtotal = BigDecimal.ZERO;
         for (Object[] roomEntry : selectedRooms) { 
             BigDecimal price = (BigDecimal) roomEntry[2]; 
@@ -312,10 +295,6 @@ public class SellEntranceController {
         ivaText.setText(String.format("%.2f", ivaAmount));
         totalToPayText.setText(String.format("%.2f", totalToPay));
     }
-
-    /**
-     * Limpia todos los campos del formulario después de una venta exitosa.
-     */
     private void clearForm() {
         visitorNameField.clear();
         visitorEmailField.clear();
@@ -323,19 +302,12 @@ public class SellEntranceController {
         creditCardSpace.getSelectionModel().clearSelection();
         roomComboBox.getSelectionModel().clearSelection();
         visitDateField.clear();
-        validationCodeField.clear(); // Limpiar el nuevo campo
+        validationCodeField.clear(); 
         selectedRooms.clear();
         calculateTotals();
         statusLabel.setText(""); 
     }
     
-    /**
-     * Muestra una alerta al usuario.
-     * @param alertType Tipo de alerta (INFORMATION, WARNING, ERROR, etc.)
-     * @param title Título de la alerta.
-     * @param header Encabezado de la alerta.
-     * @param content Contenido del mensaje.
-     */
     private void showAlert(AlertType alertType, String title, String header, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -344,27 +316,48 @@ public class SellEntranceController {
         alert.showAndWait();
     }
 
-    // --- Métodos de navegación ---
     @FXML
-    public void goToMRooms() throws IOException{ App.setRoot("Rooms"); }
+    public void goToMRooms() throws IOException{
+        App.setRoot("Rooms"); 
+    }
     @FXML
-    public void goToMCollections() throws IOException{ App.setRoot("Collections"); }
+    public void goToMCollections() throws IOException{ 
+        App.setRoot("Collections"); 
+    }
     @FXML
-    public void goToMSpecies() throws IOException{ App.setRoot("Species"); }
+    public void goToMSpecies() throws IOException{
+        App.setRoot("Species"); 
+    }
     @FXML
-    public void goToMTopics() throws IOException{ App.setRoot("Topics"); }
+    public void goToMTopics() throws IOException{ 
+        App.setRoot("Topics"); 
+    }
     @FXML
-    public void goToMPrices() throws IOException{ App.setRoot("Prices"); }
+    public void goToMPrices() throws IOException{
+        App.setRoot("Prices"); 
+    }
     @FXML
-    public void goToMCreditCards() throws IOException{ App.setRoot("Comisiones"); }
+    public void goToMCreditCards() throws IOException{ 
+        App.setRoot("Comisiones"); 
+    }
     @FXML
-    public void goToSellEntrances() throws IOException{ App.setRoot("SellEntrance"); }
+    public void goToSellEntrances() throws IOException{ 
+        App.setRoot("SellEntrance"); 
+    }
     @FXML
-    public void goToValidEntrances() throws IOException{ App.setRoot("ValidEntrance"); }
+    public void goToValidEntrances() throws IOException{ 
+        App.setRoot("ValidEntrance"); 
+    }
     @FXML
-    public void goToRateRooms() throws IOException{ App.setRoot("RateRooms"); }
+    public void goToRateRooms() throws IOException{ 
+        App.setRoot("RateRooms"); 
+    }
     @FXML
-    public void goToReports() throws IOException{ App.setRoot("Reportes"); }
+    public void goToReports() throws IOException{ 
+        App.setRoot("Reportes");
+    }
     @FXML
-    public void goToMMuseums() throws IOException{ App.setRoot("Museums"); }
+    public void goToMMuseums() throws IOException{ 
+        App.setRoot("Museums"); 
+    }
 }

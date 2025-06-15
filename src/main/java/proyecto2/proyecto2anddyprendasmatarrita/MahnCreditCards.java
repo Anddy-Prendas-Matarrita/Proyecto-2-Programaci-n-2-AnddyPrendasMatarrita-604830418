@@ -1,48 +1,40 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package proyecto2.proyecto2anddyprendasmatarrita;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
  * @author Anddy Prendas
  */
-@Entity
-@Table(name = "MAHN_CREDIT_CARDS")
-@NamedQueries({
-    @NamedQuery(name = "MahnCreditCards.findAll", query = "SELECT m FROM MahnCreditCards m"),
-    @NamedQuery(name = "MahnCreditCards.findByCardId", query = "SELECT m FROM MahnCreditCards m WHERE m.cardId = :cardId"),
-    @NamedQuery(name = "MahnCreditCards.findByType", query = "SELECT m FROM MahnCreditCards m WHERE m.type = :type"),
-    @NamedQuery(name = "MahnCreditCards.findByCommissionRate", query = "SELECT m FROM MahnCreditCards m WHERE m.commissionRate = :commissionRate")})
+@javax.persistence.Entity
+@javax.persistence.Table(name = "MAHN_CREDIT_CARDS")
+@javax.persistence.NamedQueries({
+    @javax.persistence.NamedQuery(name = "MahnCreditCards.findAll", query = "SELECT m FROM MahnCreditCards m"),
+    @javax.persistence.NamedQuery(name = "MahnCreditCards.findByCardId", query = "SELECT m FROM MahnCreditCards m WHERE m.cardId = :cardId"),
+    @javax.persistence.NamedQuery(name = "MahnCreditCards.findByType", query = "SELECT m FROM MahnCreditCards m WHERE m.type = :type"),
+    @javax.persistence.NamedQuery(name = "MahnCreditCards.findByCommissionRate", query = "SELECT m FROM MahnCreditCards m WHERE m.commissionRate = :commissionRate")})
 public class MahnCreditCards implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "CARD_ID")
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @javax.persistence.Id
+    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @javax.persistence.Basic(optional = false)
+    @javax.persistence.Column(name = "CARD_ID")
     private BigDecimal cardId;
-    @Basic(optional = false)
-    @Column(name = "TYPE")
+    @javax.persistence.Basic(optional = false)
+    @javax.persistence.Column(name = "TYPE")
     private String type;
-    @Basic(optional = false)
-    @Column(name = "COMMISSION_RATE")
+    @javax.persistence.Basic(optional = false)
+    @javax.persistence.Column(name = "COMMISSION_RATE")
     private BigDecimal commissionRate;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cardId", fetch = FetchType.LAZY)
+    @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "cardId", fetch = javax.persistence.FetchType.EAGER)
     private Collection<MahnTickets> mahnTicketsCollection;
 
     public MahnCreditCards() {
@@ -99,6 +91,7 @@ public class MahnCreditCards implements Serializable {
 
     @Override
     public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof MahnCreditCards)) {
             return false;
         }
@@ -111,6 +104,7 @@ public class MahnCreditCards implements Serializable {
 
     @Override
     public String toString() {
-        return type;
+        return "proyecto2.proyecto2anddyprendasmatarrita.MahnCreditCards[ cardId=" + cardId + " ]";
     }
+    
 }

@@ -69,6 +69,7 @@ public class RateRoomsController {
         fourthStar.setImage(imagen);
         fifthStar.setImage(imagen);
     }
+    //Metodos para navegar entre pantallas
     @FXML
     public void goToMRooms() throws IOException{
          App.setRoot("Rooms");
@@ -89,10 +90,10 @@ public class RateRoomsController {
      public void goToMPrices() throws IOException{
          App.setRoot("Prices");
      }
-      @FXML
-      public void goToMCreditCards() throws IOException{
-          App.setRoot("creditCards");
-      }
+     @FXML
+     public void goToMCreditCards() throws IOException{
+         App.setRoot("Comisiones");
+     }
      @FXML
      public void goToSellEntrances() throws IOException{
          App.setRoot("SellEntrance");

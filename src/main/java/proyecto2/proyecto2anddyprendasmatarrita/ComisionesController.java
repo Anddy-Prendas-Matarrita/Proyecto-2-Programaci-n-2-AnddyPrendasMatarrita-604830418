@@ -11,31 +11,23 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class RoomsController {
-    private RoomsManager roomManager=new RoomsManager();
-    private ObservableList<MahnRooms> listaSalas = FXCollections.observableArrayList();
+public class ComisionesController {
+     private CreditCardsManager creditCardsManager=new CreditCardsManager();
+    private ObservableList<MahnCreditCards> listaCreditCards = FXCollections.observableArrayList();
     @FXML
-    private TableView roomsTable;
+    private TableView creditCardsTable;
     @FXML
-    private TableColumn<MahnRooms, String> nameColumn;
+    private TableColumn<MahnCollections, String> typeColumn;
     @FXML
-    private TableColumn<MahnRooms, BigDecimal> museumColumn;
+    private TableColumn<MahnCollections, BigDecimal> idColumn;
     @FXML
-    private TableColumn<MahnRooms, BigDecimal> idColumn;
-    @FXML
-    private TableColumn<MahnRooms, String> descriptionColumn;
-    @FXML
-    private TableColumn<MahnRooms, String> topicColumn;
+    private TableColumn<MahnCollections, String> comisionColumn;
     @FXML
     private ComboBox filtroCombo;
     @FXML
-    private TextField newName;
+    private TextField newNameType;
     @FXML
-    private TextField newTopic;
-    @FXML
-    private TextField newMuseum;
-    @FXML
-    private TextField newDescription;
+    private TextField newComsionRate;
     @FXML
     private TextField filtroSpace;
     public void initialize(){
@@ -53,7 +45,7 @@ public class RoomsController {
     public void delete(){
         
     }
-      @FXML
+    @FXML
     public void goToMRooms() throws IOException{
          App.setRoot("Rooms");
      }
@@ -94,7 +86,7 @@ public class RoomsController {
          App.setRoot("Reportes");
      }
      @FXML
-     public void goToMMuseums() throws IOException{
-         App.setRoot("museums");
-     }
+      public void goToMMuseums() throws IOException{
+          App.setRoot("Museums");
+      }
 }
