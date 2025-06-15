@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -64,8 +65,11 @@
             </Label>
             <TextField fx:id="validationCodeInput" layoutX="140.0" layoutY="46.0" prefHeight="25.0" prefWidth="160.0" promptText="Ingrese Código" /> <Button fx:id="validateButton" layoutX="310.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleValidateTicket" text="Validar" />
             
-            <ImageView fx:id="qrImageView" fitHeight="100.0" fitWidth="100.0" layoutX="23.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="showDetailsButton" layoutX="140.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleShowDetails" text="Ver Salas" visible="false"/>
+            <ImageView fx:id="qrImageView" fitHeight="100.0" fitWidth="100.0" layoutX="23.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/CodigoQR.png" />
+               </image></ImageView>
+            <Button fx:id="showDetailsButton" layoutX="140.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleShowDetails" text="Ver Salas" visible="false" />
 
             <TableView fx:id="accessRoomsTableView" layoutX="12.0" layoutY="200.0" prefHeight="161.0" prefWidth="553.0" visible="false">
                <columns>

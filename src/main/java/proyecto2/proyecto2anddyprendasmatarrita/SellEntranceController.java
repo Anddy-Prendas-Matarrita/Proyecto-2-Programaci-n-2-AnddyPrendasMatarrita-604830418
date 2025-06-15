@@ -25,8 +25,7 @@ import javafx.scene.control.PasswordField;
 
 
 public class SellEntranceController {
-
-    @FXML
+ @FXML
     private TextField visitorNameField;
     @FXML
     private TextField visitorEmailField;
@@ -37,16 +36,16 @@ public class SellEntranceController {
     @FXML
     private ComboBox<MahnRooms> roomComboBox;
     @FXML
-    private TextField visitDateField; 
+    private TextField visitDateField;
     @FXML
     private Button addRoomButton;
     @FXML
     private Button sellButton;
     @FXML
-    private PasswordField validationCodeField; 
+    private PasswordField validationCodeField;
 
     @FXML
-    private TableView<Object[]> roomsTableView; 
+    private TableView<Object[]> roomsTableView;
     @FXML
     private TableColumn<Object[], String> roomNameColumn;
     @FXML
@@ -62,20 +61,21 @@ public class SellEntranceController {
     private Text ivaText;
     @FXML
     private Text totalToPayText;
-    
+
     @FXML
-    private Label statusLabel; 
+    private Label statusLabel;
 
     private VisitorsManager visitorsManager = new VisitorsManager();
     private CreditCardsManager creditCardsManager = new CreditCardsManager();
     private RoomsManager roomsManager = new RoomsManager();
-    private PricesManager pricesManager = new PricesManager(); 
+    private PricesManager pricesManager = new PricesManager();
     private TicketsManager ticketsManager = new TicketsManager();
     private TicketRoomManager ticketRoomManager = new TicketRoomManager();
 
     private ObservableList<Object[]> selectedRooms = FXCollections.observableArrayList();
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+ private BigDecimal currentIvaRate = new BigDecimal("0.13"); //iva por defecto
 
     @FXML
     public void initialize() {
@@ -120,7 +120,7 @@ public class SellEntranceController {
     }
 
 
-    private void loadCreditCardTypes() {
+    private void loadCreditCardTypes() {//carga todos los tipos de tarjeta que hayan
         try {
             List<MahnCreditCards> cards = creditCardsManager.getAllCreditCards();
             ObservableList<String> cardTypes = FXCollections.observableArrayList();
@@ -134,7 +134,7 @@ public class SellEntranceController {
         }
     }
     
-    private void loadAllRooms() {
+    private void loadAllRooms() { //cargar todas las salas
         try {
             List<MahnRooms> allRooms = roomsManager.getAllRooms(); 
             roomComboBox.setItems(FXCollections.observableArrayList(allRooms));
@@ -212,85 +212,100 @@ public class SellEntranceController {
     }
 
     @FXML
-    private void handleSell() {
+    private void handleSell() { //maneja la venta
+        //primero obtiene todos los datos del visitante 
         String visitorName = visitorNameField.getText();
         String visitorEmail = visitorEmailField.getText();
         String visitorPhone = visitorPhoneField.getText();
         String creditCardType = creditCardSpace.getValue();
         String validationCode = validationCodeField.getText();
 
-        if (visitorName.isEmpty() || visitorEmail.isEmpty() || selectedRooms.isEmpty() || creditCardType == null || validationCode.isEmpty()) { 
-            showAlert(AlertType.WARNING, "Advertencia", "Campos Requeridos", "omplete todos los campos (incluyendo el Código de Validación), seleccione un tipo de tarjeta y al menos una sala.");
+        if (visitorName.isEmpty() || visitorEmail.isEmpty() || selectedRooms.isEmpty() || creditCardType == null || validationCode.isEmpty()) {
+            showAlert(AlertType.WARNING, "Advertencia", "Campos Requeridos", "Complete todos los campos (incluyendo el Código de Validación), seleccione un tipo de tarjeta y al menos una sala.");
             return;
         }
 
         try {
             MahnVisitors visitor = visitorsManager.findVisitorByEmail(visitorEmail);
             if (visitor == null) {
+                //agrega el visitante a la base de datos
                 visitor = new MahnVisitors();
                 visitor.setName(visitorName);
                 visitor.setEmail(visitorEmail);
                 visitor.setPhone(visitorPhone);
                 visitorsManager.addVisitor(visitor);
+                
             } else {
                 visitor.setName(visitorName);
                 visitor.setPhone(visitorPhone);
-                visitorsManager.updateVisitor(visitor);
+                visitorsManager.updateVisitor(visitor); //edita el visitante
             }
 
             MahnCreditCards selectedCard = creditCardsManager.getCreditCardByType(creditCardType);
-            if (selectedCard == null) {
+            if (selectedCard == null) { //si la tarjeta es nula
                 showAlert(AlertType.ERROR, "Error", "Tarjeta inválida", "Tipo de tarjeta de crédito no encontrado. Por favor, verifique la configuración de tarjetas");
                 return;
             }
+
+            //se obtiene el monto sin iva
+            BigDecimal subtotalSaleAmount = new BigDecimal(subtotalText.getText());
+
+            //se obtiene la tasa de comision
+            BigDecimal commissionRate = selectedCard.getCommissionRate();
+            // se calcula el monto de comision
+            BigDecimal calculatedCommissionAmount = subtotalSaleAmount.multiply(commissionRate);
+
+            //se obtiene el total a pagar con iva aplicado
             BigDecimal finalTotal = new BigDecimal(totalToPayText.getText());
-            BigDecimal ivaAmount = new BigDecimal(ivaText.getText()); 
+            BigDecimal ivaAmount = new BigDecimal(ivaText.getText());
+
             MahnTickets newTicket = new MahnTickets();
             newTicket.setVisitorId(visitor);
-            newTicket.setPurchaseDate(new Date()); 
+            newTicket.setPurchaseDate(new Date());
             newTicket.setCardId(selectedCard);
             newTicket.setTotalAmount(finalTotal);
-            newTicket.setCommissionAmount(ivaAmount); 
+            newTicket.setCommissionAmount(calculatedCommissionAmount);
             newTicket.setQrCode(validationCode);
 
             ticketsManager.addTickets(newTicket);
 
-            for (Object[] roomDataArray : selectedRooms) { 
-                MahnRooms actualRoom = (MahnRooms) roomDataArray[0]; 
-                LocalDate visitDate = (LocalDate) roomDataArray[1]; 
+            for (Object[] roomDataArray : selectedRooms) {
+                MahnRooms actualRoom = (MahnRooms) roomDataArray[0];
+                LocalDate visitDate = (LocalDate) roomDataArray[1];
 
                 MahnTicketRoom ticketRoom = new MahnTicketRoom();
                 ticketRoom.setTicketId(newTicket);
                 ticketRoom.setRoomId(actualRoom);
-                ticketRoom.setVisitDate(java.sql.Date.valueOf(visitDate)); 
+                ticketRoom.setVisitDate(java.sql.Date.valueOf(visitDate));
                 ticketRoomManager.addTicketRoom(ticketRoom);
             }
 
-            showAlert(AlertType.INFORMATION, "Venta Exitosa", "Ticket Generado", 
-                      "Venta realizada con éxito! \nID del Ticket: " + newTicket.getTicketId() + 
-                      "\nCódigo de Validación: " + newTicket.getQrCode() + 
-                      "\nSubtotal: " + subtotalText.getText() + 
-                      "\nIVA: " + ivaText.getText() + 
-                      "\nTotal: " + totalToPayText.getText());
+            showAlert(AlertType.INFORMATION, "Venta Exitosa", "Ticket Generado",
+                    "Venta realizada con éxito! \nID del Ticket: " + newTicket.getTicketId() +
+                    "\nCódigo de Validación: " + newTicket.getQrCode() +
+                    "\nSubtotal: " + String.format("%.2f", subtotalSaleAmount) +
+                    "\nIVA: " + String.format("%.2f", ivaAmount) +
+                    "\nComisión Tarjeta: " + String.format("%.2f", calculatedCommissionAmount) +
+                    "\nTotal: " + String.format("%.2f", finalTotal));
             clearForm();
 
         } catch (Exception e) {
-            showAlert(AlertType.ERROR, "Error de Venta", "No se pudo completar la venta", "Ocurrio un error al procesar la venta: " + e.getMessage());
+            showAlert(AlertType.ERROR, "Error de Venta", "No se pudo completar la venta", "Ocurrió un error al procesar la venta: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    private void calculateTotals() {//Aqui se calcula el total a pagar
+
+   private void calculateTotals() {
         BigDecimal subtotal = BigDecimal.ZERO;
-        for (Object[] roomEntry : selectedRooms) { 
-            BigDecimal price = (BigDecimal) roomEntry[2]; 
+        for (Object[] roomEntry : selectedRooms) {
+            BigDecimal price = (BigDecimal) roomEntry[2];
             subtotal = subtotal.add(price);
         }
-        
-        BigDecimal ivaRate = new BigDecimal("0.13"); 
-        BigDecimal ivaAmount = subtotal.multiply(ivaRate);
-        
+        BigDecimal ivaAmount = subtotal.multiply(this.currentIvaRate);
+
         BigDecimal totalToPay = subtotal.add(ivaAmount);
-        
+
         subtotalText.setText(String.format("%.2f", subtotal));
         ivaText.setText(String.format("%.2f", ivaAmount));
         totalToPayText.setText(String.format("%.2f", totalToPay));
@@ -337,9 +352,9 @@ public class SellEntranceController {
         App.setRoot("Prices"); 
     }
     @FXML
-    public void goToMCreditCards() throws IOException{ 
-        App.setRoot("Comisiones"); 
-    }
+     public void goToMCreditCards() throws IOException{
+         App.setRoot("creditCards");
+     }
     @FXML
     public void goToSellEntrances() throws IOException{ 
         App.setRoot("SellEntrance"); 

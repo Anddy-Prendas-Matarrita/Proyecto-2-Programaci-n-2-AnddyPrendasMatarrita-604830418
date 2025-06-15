@@ -24,7 +24,7 @@ public class MuseumsController {
     
     private MuseumsManager museumManager = new MuseumsManager();
     private ObservableList<MahnMuseums> listaMuseos = FXCollections.observableArrayList();
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy"); //este es el formato en el que tiene que ir escrita las fechas
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); //este es el formato en el que tiene que ir escrita las fechas dia mes año
 
     @FXML
     private TableView<MahnMuseums> museumsTable;
@@ -257,9 +257,9 @@ public class MuseumsController {
           App.setRoot("Prices");
       }
       @FXML
-      public void goToMCreditCards() throws IOException{
-          App.setRoot("Comisiones");
-      }
+     public void goToMCreditCards() throws IOException{
+         App.setRoot("creditCards");
+     }
       @FXML
       public void goToSellEntrances() throws IOException{
           App.setRoot("SellEntrance");

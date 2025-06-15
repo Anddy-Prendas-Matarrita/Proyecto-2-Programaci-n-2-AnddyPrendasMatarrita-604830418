@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 public class SpeciesManager {
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("user_management");
@@ -23,6 +24,57 @@ public class SpeciesManager {
         List<MahnSpecies> species = em.createQuery("SELECT u FROM MahnSpecies u", MahnSpecies.class).getResultList();
         em.close();
         return species;
+    }
+    public List<MahnSpecies> getAllSpecies() { 
+        EntityManager em = emf.createEntityManager();
+        List<MahnSpecies> species = em.createQuery("SELECT s FROM MahnSpecies s", MahnSpecies.class).getResultList();
+        em.close();
+        return species;
+    }
+ 
+    public List<MahnSpecies> getSpeciesFiltered(String filterType, String filterValue) { //obtiene la lista de species que coinciden con los filtros
+        EntityManager em = emf.createEntityManager();
+        List<MahnSpecies> speciesList;
+        try {
+            String jpql;
+            TypedQuery<MahnSpecies> query;
+
+            if (filterType == null || filterValue == null || filterValue.trim().isEmpty()) {
+                jpql = "SELECT s FROM MahnSpecies s";
+                query = em.createQuery(jpql, MahnSpecies.class);
+            } else {
+                switch (filterType.toLowerCase()) {
+                    case "nombre científico":
+                        jpql = "SELECT s FROM MahnSpecies s WHERE LOWER(s.scientificName) LIKE :filterValue";
+                        query = em.createQuery(jpql, MahnSpecies.class);
+                        query.setParameter("filterValue", "%" + filterValue.toLowerCase() + "%");
+                        break;
+                    case "nombre común":
+                        jpql = "SELECT s FROM MahnSpecies s WHERE LOWER(s.commonName) LIKE :filterValue";
+                        query = em.createQuery(jpql, MahnSpecies.class);
+                        query.setParameter("filterValue", "%" + filterValue.toLowerCase() + "%");
+                        break;
+                    case "época":
+                        jpql = "SELECT s FROM MahnSpecies s WHERE LOWER(s.era) LIKE :filterValue";
+                        query = em.createQuery(jpql, MahnSpecies.class);
+                        query.setParameter("filterValue", "%" + filterValue.toLowerCase() + "%");
+                        break;
+                    case "características":
+                        jpql = "SELECT s FROM MahnSpecies s WHERE LOWER(s.characteristics) LIKE :filterValue";
+                        query = em.createQuery(jpql, MahnSpecies.class);
+                        query.setParameter("filterValue", "%" + filterValue.toLowerCase() + "%");
+                        break;
+                    default:
+                        jpql = "SELECT s FROM MahnSpecies s";
+                        query = em.createQuery(jpql, MahnSpecies.class);
+                        break;
+                }
+            }
+            speciesList = query.getResultList();
+        } finally {
+            em.close();
+        }
+        return speciesList;
     }
 
     public void updateSpecie(MahnSpecies species) {
@@ -42,6 +94,12 @@ public class SpeciesManager {
         }
         em.getTransaction().commit();
         em.close();
+    }
+       public List<MahnCollections> getAllCollections() {
+        EntityManager em = emf.createEntityManager();
+        List<MahnCollections> collections = em.createQuery("SELECT c FROM MahnCollections c", MahnCollections.class).getResultList();
+        em.close();
+        return collections;
     }
 
     public void close() {

@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import java.math.BigDecimal; 
+import javafx.scene.image.Image;
 
 public class ValidEntranceController {
     @FXML
@@ -88,8 +89,8 @@ public class ValidEntranceController {
         currentTicket = null;
 
         if (validationCode.isEmpty()) {
-            showAlert(AlertType.WARNING, "Advertencia", "Campo Requerido", "Por favor, ingrese el Código de Validación.");
-            statusLabel.setText("Ingrese Código de Validación.");
+            showAlert(AlertType.WARNING, "Advertencia", "Campo Requerido", "Por favor, ingrese el Código de validación.");
+            statusLabel.setText("Ingrese Código de validación.");
             return;
         }
 
@@ -116,19 +117,20 @@ public class ValidEntranceController {
             }
             
             if (!isValidForToday) {
-                showAlert(AlertType.WARNING, "Ticket No Válido", "Fecha Incorrecta", "Este ticket no tiene salas programadas para hoy.");
+                showAlert(AlertType.WARNING, "Ticket No Válido", "Fecha Incorrecta", "Este ticket no tiene salas programadas para hoy");
                 statusLabel.setText("Ticket no válido para hoy.");
                 return;
             }
-
+            Image image= new Image("/Images/CodigoQr.png");
+            qrImageView.setImage(image); // se le agrega la imagen de qr
             qrImageView.setVisible(true); 
             showDetailsButton.setVisible(true);
-            statusLabel.setText("Ticket válido. Haga clic en 'Ver Salas' para más detalles.");
+            statusLabel.setText("Ticket valido Haga clic en 'Ver Salas' para más detalles");
             currentTicket = ticket; 
 
         } catch (Exception e) {
-            showAlert(AlertType.ERROR, "Error de Validación", "Error al validar ticket", "Ocurrió un error al procesar la validación: " + e.getMessage());
-            statusLabel.setText("Error al validar.");
+            showAlert(AlertType.ERROR, "Error de Validacion", "Error al validar ticket", "Ocurrió un error al procesar la validacion: " + e.getMessage());
+            statusLabel.setText("Error al validar");
         }
     }
 
@@ -136,7 +138,7 @@ public class ValidEntranceController {
     private void handleShowDetails() {
         if (currentTicket == null) {
             showAlert(AlertType.ERROR, "Error", "Ticket no validado", "Primero debe validar un ticket.");
-            statusLabel.setText("Ticket no validado.");
+            statusLabel.setText("Ticket no validado");
             return;
         }
         
@@ -152,11 +154,11 @@ public class ValidEntranceController {
         
         if (accessibleRoomsData.isEmpty()) {
             showAlert(AlertType.INFORMATION, "Información", "No hay salas para hoy", "No hay salas disponibles en este ticket para la fecha de hoy.");
-            statusLabel.setText("No hay salas para hoy.");
+            statusLabel.setText("No hay salas para hoy");
         } else {
             accessRoomsTableView.setVisible(true);
             enjoyMessageText.setVisible(true);
-            statusLabel.setText("¡Acceso permitido! DISFRUTE DE SU ESTADÍA.");
+            statusLabel.setText("Se le permite el acces, disfrute de su estadia");
         }
     }
 
@@ -178,7 +180,7 @@ public class ValidEntranceController {
     @FXML
     public void goToMPrices() throws IOException{ App.setRoot("Prices"); }
     @FXML
-    public void goToMCreditCards() throws IOException{ App.setRoot("Comisiones"); }
+    public void goToMCreditCards() throws IOException{ App.setRoot("creditCards"); }
     @FXML
     public void goToSellEntrances() throws IOException{ App.setRoot("SellEntrance"); }
     @FXML

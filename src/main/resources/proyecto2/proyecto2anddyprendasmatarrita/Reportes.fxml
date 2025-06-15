@@ -8,37 +8,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.TextField?> <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.proyecto2anddyprendasmatarrita.ReportsController">
    <children>
       <Pane layoutX="9.0" layoutY="11.0" prefHeight="377.0" prefWidth="167.0" style="-fx-border-color: black;">
          <children>
             <MenuButton layoutX="14.0" layoutY="162.0" mnemonicParsing="false" text="Mantenimientos">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
-                <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMSpecies" text="Especies" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMTopics" text="Temáticas" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMPrices" text="Precios" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMCreditCards" text="Comisiones" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMMuseums" text="Museos" />
-              </items>
+               </items>
             </MenuButton>
             <MenuButton layoutX="14.0" layoutY="187.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Entradas">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
-                <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
-              </items>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
+               </items>
             </MenuButton>
             <MenuButton layoutX="14.0" layoutY="212.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Valoración">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
-              </items>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
+               </items>
             </MenuButton>
             <MenuButton layoutX="14.0" layoutY="237.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Reportes">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
-              </items>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
+               </items>
             </MenuButton>
             <ImageView fitHeight="140.0" fitWidth="152.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
          </children>
@@ -50,8 +55,31 @@
                   <Font name="System Bold Italic" size="22.0" />
                </font>
             </Label>
-            <Button layoutX="34.0" layoutY="164.0" mnemonicParsing="false" text="Generar lista" />
-            <Button layoutX="231.0" layoutY="164.0" mnemonicParsing="false" text="Generar total a pagar" />
+
+            <Label layoutX="14.0" layoutY="35.0" text="Comisiones por Fecha">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="60.0" text="Fecha Inicio (dd-mm-yyyy):" />
+            <TextField fx:id="startDateField" layoutX="180.0" layoutY="56.0" prefWidth="120.0" promptText="dd-mm-yyyy"/> <Label layoutX="14.0" layoutY="88.0" text="Fecha Fin (dd-mm-yyyy):" />
+            <TextField fx:id="endDateField" layoutX="180.0" layoutY="84.0" prefWidth="120.0" promptText="dd-mm-yyyy"/> <Button layoutX="14.0" layoutY="115.0" mnemonicParsing="false" onAction="#generateCommissionsReport" text="Generar Reporte Comisiones" />
+            <TextArea fx:id="commissionsOutputArea" editable="false" layoutX="14.0" layoutY="150.0" prefHeight="60.0" prefWidth="380.0" wrapText="true" />
+
+            <Label layoutX="14.0" layoutY="220.0" text="Valoración de Salas">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="ratingTypeComboBox" layoutX="14.0" layoutY="245.0" prefWidth="150.0" promptText="Seleccionar tipo..." />
+            <Button layoutX="180.0" layoutY="245.0" mnemonicParsing="false" onAction="#generateRoomRatingsReport" text="Generar Reporte Salas" />
+            <TableView fx:id="roomRatingsTable" layoutX="14.0" layoutY="275.0" prefHeight="90.0" prefWidth="380.0">
+               <columns>
+                  <TableColumn fx:id="roomNameCol" prefWidth="150.0" text="Sala" />
+                  <TableColumn fx:id="museumNameCol" prefWidth="130.0" text="Museo" />
+                  <TableColumn fx:id="averageRatingCol" prefWidth="100.0" text="Puntuación" />
+               </columns>
+            </TableView>
          </children>
       </Pane>
    </children>

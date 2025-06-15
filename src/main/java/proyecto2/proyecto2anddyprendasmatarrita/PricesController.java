@@ -137,7 +137,7 @@ public class PricesController {
                     priceManager.deletePrice(selectedPrice.getPriceId());
                     showAlert(Alert.AlertType.INFORMATION, "Éxito", "Precio eliminado correctamente.");
                     clearFields();
-                    loadData(); // Recargar datos para reflejar la eliminación
+                    loadData();
                 } catch (Exception e) {
                     showAlert(Alert.AlertType.ERROR, "Error al eliminar", "No se pudo eliminar el precio: " + e.getMessage());
                     e.printStackTrace();
@@ -174,8 +174,6 @@ public class PricesController {
                     showAlert(Alert.AlertType.ERROR, "Error de entrada", "El nombre de la sala no puede estar vacío.");
                     return;
                 }
-
-                // Buscar la sala por nombre
                 MahnRooms selectedRoom = roomsManager.getRoomByName(roomName);
                 if (selectedRoom == null) {
                     showAlert(Alert.AlertType.ERROR, "Sala no encontrada", "La sala '" + roomName + "' no existe en la base de datos.");
@@ -189,7 +187,7 @@ public class PricesController {
                 priceManager.updatePrice(selectedPrice);
                 showAlert(Alert.AlertType.INFORMATION, "Éxito", "Precio actualizado correctamente.");
                 clearFields();
-                loadData(); // Recargar datos para mostrar los cambios
+                loadData(); 
             } catch (NumberFormatException e) {
                 showAlert(Alert.AlertType.ERROR, "Error de formato", "Por favor, ingrese valores numéricos válidos para los precios.");
             } catch (Exception e) {
@@ -207,11 +205,11 @@ public class PricesController {
 
         List<MahnPrices> filteredPrices = null;
 
-        if (selectedRoomFilter != null) { // Si se seleccionó una sala en el ComboBox
+        if (selectedRoomFilter != null) { // Si se selecciona una sala en el combobox
             filteredPrices = priceManager.filterPricesByRoom(selectedRoomFilter);
-        } else if (!filterText.isEmpty()) { // Si se escribió texto en el TextField
+        } else if (!filterText.isEmpty()) { // Si se escribe texto en el texfield
             filteredPrices = priceManager.filterPricesByRoomName(filterText);
-        } else { // Si no hay filtros, cargar todos los datos
+        } else { // si no hay filtros carga todos los datos
             loadData();
             return;
         }
@@ -243,7 +241,7 @@ public class PricesController {
      }
      @FXML
      public void goToMCreditCards() throws IOException{
-         App.setRoot("Comisiones");
+         App.setRoot("creditCards");
      }
      @FXML
      public void goToSellEntrances() throws IOException{
