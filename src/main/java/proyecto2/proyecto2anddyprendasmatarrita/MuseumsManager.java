@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
@@ -67,6 +68,27 @@ public class MuseumsManager {
         em.merge(museum);
         em.getTransaction().commit();
         em.close();
+    }
+    public MahnMuseums getMuseumById(BigDecimal museumId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.find(MahnMuseums.class, museumId);
+        } finally {
+            em.close();
+        }
+    }
+
+    public MahnMuseums getMuseumByName(String name) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<MahnMuseums> query = em.createQuery("SELECT m FROM MahnMuseums m WHERE m.name = :name", MahnMuseums.class);
+            query.setParameter("name", name);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
     }
 
     public void deleteMuseum(BigDecimal museumId) {

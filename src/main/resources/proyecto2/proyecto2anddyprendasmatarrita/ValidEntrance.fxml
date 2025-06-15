@@ -1,78 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="411.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.proyecto2anddyprendasmatarrita.ValidEntranceController">
    <children>
-      <Pane layoutX="2.0" layoutY="11.0" prefHeight="377.0" prefWidth="120.0" style="-fx-border-color: black;">
+      <Pane layoutX="2.0" layoutY="11.0" prefHeight="377.0" prefWidth="115.0" style="-fx-border-color: black;">
          <children>
-            <MenuButton layoutX="4.0" layoutY="157.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="108.0" text="Mantenimientos">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
-                <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
+            <MenuButton layoutX="2.0" layoutY="159.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="108.0" text="Mantenimientos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMSpecies" text="Especies" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMTopics" text="Temáticas" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMPrices" text="Precios" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMCreditCards" text="Comisiones" />
-                  <MenuItem mnemonicParsing="false" onAction="#goToMMuseums" text="Museo" />
-              </items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToMMuseums" text="Museos" />
+               </items>
                <font>
                   <Font size="10.0" />
                </font>
             </MenuButton>
-            <MenuButton layoutX="5.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Entradas">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
-                <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
-              </items>
+            <MenuButton layoutX="5.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Entradas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
+               </items>
             </MenuButton>
-            <MenuButton layoutX="5.0" layoutY="214.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Valoración">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
-              </items>
+            <MenuButton layoutX="5.0" layoutY="214.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Valoración">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
+               </items>
             </MenuButton>
-            <MenuButton layoutX="5.0" layoutY="239.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Reportes">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
-              </items>
+            <MenuButton layoutX="5.0" layoutY="239.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Reportes">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
+               </items>
             </MenuButton>
             <ImageView fitHeight="87.0" fitWidth="97.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-            <Pane layoutX="8.0" layoutY="7.0" prefHeight="87.0" prefWidth="97.0" style="-fx-border-color: black;" />
          </children>
       </Pane>
-      <Pane layoutX="121.0" layoutY="11.0" prefHeight="377.0" prefWidth="559.0" style="-fx-border-color: black;">
+      <Pane layoutX="115.0" layoutY="11.0" prefHeight="377.0" prefWidth="579.0" style="-fx-border-color: black;">
          <children>
-            <Pane layoutX="171.0" layoutY="30.0" prefHeight="164.0" prefWidth="200.0" style="-fx-border-color: black;">
-               <children>
-                  <ImageView fitHeight="164.0" fitWidth="200.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </Pane>
-            <Label layoutX="208.0" layoutY="-2.0" text="Validar entrada">
+            <Label layoutX="178.0" layoutY="-2.0" text="Validar Entradas">
                <font>
                   <Font name="System Bold Italic" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="44.0" text="LEA SU CÓDIGO QR AQUÍ:">
-               <font>
+            
+            <Label layoutX="23.0" layoutY="50.0" text="Código de Validación:"> <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="203.0" text="El día de hoy puede acceder a las siguientes salas:" />
-            <TableView layoutX="14.0" layoutY="220.0" prefHeight="112.0" prefWidth="441.0">
-              <columns>
-                <TableColumn prefWidth="191.0" text="Nombre" />
-                <TableColumn prefWidth="249.0" text="Temática" />
-              </columns>
+            <TextField fx:id="validationCodeInput" layoutX="140.0" layoutY="46.0" prefHeight="25.0" prefWidth="160.0" promptText="Ingrese Código" /> <Button fx:id="validateButton" layoutX="310.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleValidateTicket" text="Validar" />
+            
+            <ImageView fx:id="qrImageView" fitHeight="100.0" fitWidth="100.0" layoutX="23.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="showDetailsButton" layoutX="140.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleShowDetails" text="Ver Salas" visible="false"/>
+
+            <TableView fx:id="accessRoomsTableView" layoutX="12.0" layoutY="200.0" prefHeight="161.0" prefWidth="553.0" visible="false">
+               <columns>
+                  <TableColumn fx:id="accessRoomNameColumn" prefWidth="150.0" text="Sala" />
+                  <TableColumn fx:id="accessRoomDescriptionColumn" prefWidth="250.0" text="Descripción" />
+                  <TableColumn fx:id="accessRoomVisitDateColumn" prefWidth="150.0" text="Fecha de Visita" />
+               </columns>
             </TableView>
-            <Label layoutX="171.0" layoutY="338.0" text="DISFRUTE DE SU ESTADÍA EN EL MUSEO!!!!" />
+            <Label fx:id="statusLabel" layoutX="23.0" layoutY="360.0" prefHeight="17.0" prefWidth="400.0" textFill="#e40808" />
+            <Text fx:id="enjoyMessageText" layoutX="120.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DISFRUTE DE SU ESTADÍA EN EL MUSEO!!!!" visible="false">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>

@@ -1,45 +1,57 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyecto2.proyecto2anddyprendasmatarrita;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Anddy Prendas
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "MAHN_COLLECTIONS")
-@javax.persistence.NamedQueries({
-    @javax.persistence.NamedQuery(name = "MahnCollections.findAll", query = "SELECT m FROM MahnCollections m"),
-    @javax.persistence.NamedQuery(name = "MahnCollections.findByCollectionId", query = "SELECT m FROM MahnCollections m WHERE m.collectionId = :collectionId"),
-    @javax.persistence.NamedQuery(name = "MahnCollections.findByName", query = "SELECT m FROM MahnCollections m WHERE m.name = :name"),
-    @javax.persistence.NamedQuery(name = "MahnCollections.findByCentury", query = "SELECT m FROM MahnCollections m WHERE m.century = :century"),
-    @javax.persistence.NamedQuery(name = "MahnCollections.findByDescription", query = "SELECT m FROM MahnCollections m WHERE m.description = :description")})
+@Entity
+@Table(name = "MAHN_COLLECTIONS")
+@NamedQueries({
+    @NamedQuery(name = "MahnCollections.findAll", query = "SELECT m FROM MahnCollections m"),
+    @NamedQuery(name = "MahnCollections.findByCollectionId", query = "SELECT m FROM MahnCollections m WHERE m.collectionId = :collectionId"),
+    @NamedQuery(name = "MahnCollections.findByName", query = "SELECT m FROM MahnCollections m WHERE m.name = :name"),
+    @NamedQuery(name = "MahnCollections.findByCentury", query = "SELECT m FROM MahnCollections m WHERE m.century = :century"),
+    @NamedQuery(name = "MahnCollections.findByDescription", query = "SELECT m FROM MahnCollections m WHERE m.description = :description")})
 public class MahnCollections implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "COLLECTION_ID")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "COLLECTION_ID")
     private BigDecimal collectionId;
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "NAME")
+    @Basic(optional = false)
+    @Column(name = "NAME")
     private String name;
-    @javax.persistence.Column(name = "CENTURY")
+    @Column(name = "CENTURY")
     private String century;
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "DESCRIPTION")
+    @Basic(optional = false)
+    @Column(name = "DESCRIPTION")
     private String description;
-    @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "collectionId", fetch = javax.persistence.FetchType.EAGER)
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "collectionId", fetch = FetchType.LAZY)
     private Collection<MahnSpecies> mahnSpeciesCollection;
-    @javax.persistence.JoinColumn(name = "ROOM_ID", referencedColumnName = "ROOM_ID")
-    @javax.persistence.ManyToOne(optional = false, fetch = javax.persistence.FetchType.EAGER)
+    
+    @JoinColumn(name = "ROOM_ID", referencedColumnName = "ROOM_ID")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private MahnRooms roomId;
 
     public MahnCollections() {
@@ -124,7 +136,6 @@ public class MahnCollections implements Serializable {
 
     @Override
     public String toString() {
-        return "proyecto2.proyecto2anddyprendasmatarrita.MahnCollections[ collectionId=" + collectionId + " ]";
+        return name;
     }
-    
 }

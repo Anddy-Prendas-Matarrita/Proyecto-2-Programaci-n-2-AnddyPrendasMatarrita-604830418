@@ -1,54 +1,61 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyecto2.proyecto2anddyprendasmatarrita;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType; // Asegúrate de que esta importación exista
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author Anddy Prendas
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "MAHN_SPECIES")
-@javax.persistence.NamedQueries({
-    @javax.persistence.NamedQuery(name = "MahnSpecies.findAll", query = "SELECT m FROM MahnSpecies m"),
-    @javax.persistence.NamedQuery(name = "MahnSpecies.findBySpeciesId", query = "SELECT m FROM MahnSpecies m WHERE m.speciesId = :speciesId"),
-    @javax.persistence.NamedQuery(name = "MahnSpecies.findByScientificName", query = "SELECT m FROM MahnSpecies m WHERE m.scientificName = :scientificName"),
-    @javax.persistence.NamedQuery(name = "MahnSpecies.findByCommonName", query = "SELECT m FROM MahnSpecies m WHERE m.commonName = :commonName"),
-    @javax.persistence.NamedQuery(name = "MahnSpecies.findByExtinctionDate", query = "SELECT m FROM MahnSpecies m WHERE m.extinctionDate = :extinctionDate"),
-    @javax.persistence.NamedQuery(name = "MahnSpecies.findByEra", query = "SELECT m FROM MahnSpecies m WHERE m.era = :era"),
-    @javax.persistence.NamedQuery(name = "MahnSpecies.findByWeight", query = "SELECT m FROM MahnSpecies m WHERE m.weight = :weight"),
-    @javax.persistence.NamedQuery(name = "MahnSpecies.findBySpeciesSize", query = "SELECT m FROM MahnSpecies m WHERE m.speciesSize = :speciesSize"),
-    @javax.persistence.NamedQuery(name = "MahnSpecies.findByCharacteristics", query = "SELECT m FROM MahnSpecies m WHERE m.characteristics = :characteristics")})
+@Entity
+@Table(name = "MAHN_SPECIES")
+@NamedQueries({
+    @NamedQuery(name = "MahnSpecies.findAll", query = "SELECT m FROM MahnSpecies m"),
+    @NamedQuery(name = "MahnSpecies.findBySpeciesId", query = "SELECT m FROM MahnSpecies m WHERE m.speciesId = :speciesId"),
+    @NamedQuery(name = "MahnSpecies.findByScientificName", query = "SELECT m FROM MahnSpecies m WHERE m.scientificName = :scientificName"),
+    @NamedQuery(name = "MahnSpecies.findByCommonName", query = "SELECT m FROM MahnSpecies m WHERE m.commonName = :commonName"),
+    @NamedQuery(name = "MahnSpecies.findByExtinctionDate", query = "SELECT m FROM MahnSpecies m WHERE m.extinctionDate = :extinctionDate"),
+    @NamedQuery(name = "MahnSpecies.findByEra", query = "SELECT m FROM MahnSpecies m WHERE m.era = :era"),
+    @NamedQuery(name = "MahnSpecies.findByWeight", query = "SELECT m FROM MahnSpecies m WHERE m.weight = :weight"),
+    @NamedQuery(name = "MahnSpecies.findBySpeciesSize", query = "SELECT m FROM MahnSpecies m WHERE m.speciesSize = :speciesSize"),
+    @NamedQuery(name = "MahnSpecies.findByCharacteristics", query = "SELECT m FROM MahnSpecies m WHERE m.characteristics = :characteristics")})
 public class MahnSpecies implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "SPECIES_ID")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "SPECIES_ID")
     private BigDecimal speciesId;
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "SCIENTIFIC_NAME")
+    @Basic(optional = false)
+    @Column(name = "SCIENTIFIC_NAME")
     private String scientificName;
-    @javax.persistence.Column(name = "COMMON_NAME")
+    @Column(name = "COMMON_NAME")
     private String commonName;
-    @javax.persistence.Column(name = "EXTINCTION_DATE")
+    @Column(name = "EXTINCTION_DATE")
     private String extinctionDate;
-    @javax.persistence.Column(name = "ERA")
+    @Column(name = "ERA")
     private String era;
-    @javax.persistence.Column(name = "WEIGHT")
+    @Column(name = "WEIGHT")
     private String weight;
-    @javax.persistence.Column(name = "SPECIES_SIZE")
+    @Column(name = "SPECIES_SIZE")
     private String speciesSize;
-    @javax.persistence.Column(name = "CHARACTERISTICS")
+    @Column(name = "CHARACTERISTICS")
     private String characteristics;
-    @javax.persistence.JoinColumn(name = "COLLECTION_ID", referencedColumnName = "COLLECTION_ID")
-    @javax.persistence.ManyToOne(optional = false, fetch = javax.persistence.FetchType.EAGER)
+    @JoinColumn(name = "COLLECTION_ID", referencedColumnName = "COLLECTION_ID")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER) 
     private MahnCollections collectionId;
 
     public MahnSpecies() {
@@ -144,7 +151,6 @@ public class MahnSpecies implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof MahnSpecies)) {
             return false;
         }
@@ -157,7 +163,6 @@ public class MahnSpecies implements Serializable {
 
     @Override
     public String toString() {
-        return "proyecto2.proyecto2anddyprendasmatarrita.MahnSpecies[ speciesId=" + speciesId + " ]";
+        return (commonName != null && !commonName.isEmpty()) ? commonName : scientificName;
     }
-    
 }

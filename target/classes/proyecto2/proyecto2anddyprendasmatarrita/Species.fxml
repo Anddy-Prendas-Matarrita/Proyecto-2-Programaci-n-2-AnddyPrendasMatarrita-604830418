@@ -18,33 +18,34 @@
       <Pane layoutX="2.0" layoutY="11.0" prefHeight="377.0" prefWidth="114.0" style="-fx-border-color: black;">
          <children>
             <MenuButton layoutX="4.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Mantenimientos">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
-                <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
+               <items>
+                 <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
+                 <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMSpecies" text="Especies" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMTopics" text="Temáticas" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMPrices" text="Precios" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMCreditCards" text="Comisiones" />
-              </items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToMMuseums" text="Museos" />
+               </items>
                <font>
                   <Font size="10.0" />
                </font>
             </MenuButton>
             <MenuButton layoutX="5.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Entradas">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
-                <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
-              </items>
+               <items>
+                 <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
+                 <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
+               </items>
             </MenuButton>
             <MenuButton layoutX="5.0" layoutY="214.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Valoración">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
-              </items>
+               <items>
+                 <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
+               </items>
             </MenuButton>
             <MenuButton layoutX="5.0" layoutY="239.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Reportes">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
-              </items>
+               <items>
+                 <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
+               </items>
             </MenuButton>
             <ImageView fitHeight="87.0" fitWidth="97.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
             <Pane fx:id="roomImage" layoutX="10.0" layoutY="7.0" prefHeight="87.0" prefWidth="97.0" style="-fx-border-color: black;" />
@@ -69,22 +70,23 @@
             </Label>
             <TextField fx:id="filtroSpace" layoutX="96.0" layoutY="43.0" prefHeight="25.0" prefWidth="137.0" />
             <ComboBox fx:id="filtroCombo" layoutX="290.0" layoutY="43.0" prefHeight="25.0" prefWidth="167.0" />
-            <Button layoutX="487.0" layoutY="43.0" mnemonicParsing="false" text="Filtrar" />
+            <Button layoutX="487.0" layoutY="43.0" mnemonicParsing="false" onAction="#filterData" text="Filtrar" />
             <TableView fx:id="speciesTable" layoutX="3.0" layoutY="79.0" prefHeight="191.0" prefWidth="569.0">
-              <columns>
-                <TableColumn fx:id="scientificNameColumn" prefWidth="112.0" text="Nombre científico" />
-                <TableColumn fx:id="nameColumn" prefWidth="99.0" text="Nombre común" />
+               <columns>
+                 <TableColumn fx:id="scientificNameColumn" prefWidth="112.0" text="Nombre científico" />
+                 <TableColumn fx:id="nameColumn" prefWidth="99.0" text="Nombre común" />
                   <TableColumn fx:id="extinctionDateColumn" prefWidth="93.0" text="Fecha extinción" />
                   <TableColumn fx:id="eraColumn" prefWidth="50.0" text="Época" />
                   <TableColumn fx:id="weightColumn" prefWidth="35.0" text="Peso" />
                   <TableColumn fx:id="sizeColumn" prefWidth="53.0" text="Tamaño" />
                   <TableColumn fx:id="idColumn" prefWidth="37.0" text="ID" />
                   <TableColumn fx:id="featuresColumn" prefWidth="89.0" text="Características" />
-              </columns>
+                  <TableColumn fx:id="collectionColumn" prefWidth="89.0" text="Colección" />
+               </columns>
             </TableView>
-            <Button layoutX="481.0" layoutY="344.0" mnemonicParsing="false" text="Eliminar" />
-            <Button layoutX="399.0" layoutY="344.0" mnemonicParsing="false" text="Editar" />
-            <Button layoutX="185.0" layoutY="344.0" mnemonicParsing="false" text="Insertar" />
+            <Button layoutX="481.0" layoutY="344.0" mnemonicParsing="false" onAction="#delete" text="Eliminar" />
+            <Button layoutX="399.0" layoutY="344.0" mnemonicParsing="false" onAction="#updateInDB" text="Editar" />
+            <Button layoutX="185.0" layoutY="344.0" mnemonicParsing="false" onAction="#addToDB" text="Insertar" />
             <Label layoutX="113.0" layoutY="270.0" text="Añadir especie">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
@@ -97,7 +99,7 @@
             <TextField fx:id="newWeight" layoutX="241.0" layoutY="287.0" prefHeight="25.0" prefWidth="67.0" promptText="Peso" />
             <TextField fx:id="newSize" layoutX="263.0" layoutY="312.0" prefHeight="25.0" prefWidth="67.0" promptText="Tamaño" />
             <TextField fx:id="newFeatures" layoutX="314.0" layoutY="287.0" prefHeight="25.0" prefWidth="97.0" promptText="Características" />
-            <TextField fx:id="newCollection" layoutX="332.0" layoutY="312.0" prefHeight="25.0" prefWidth="97.0" promptText="Collección" />
+            <ComboBox fx:id="newCollectionComboBox" layoutX="419.0" layoutY="287.0" prefHeight="25.0" prefWidth="127.0" promptText="Colección" />
          </children>
       </Pane>
    </children>

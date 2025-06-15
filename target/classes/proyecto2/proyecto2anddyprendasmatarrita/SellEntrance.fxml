@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -19,33 +20,34 @@
       <Pane layoutX="2.0" layoutY="11.0" prefHeight="377.0" prefWidth="115.0" style="-fx-border-color: black;">
          <children>
             <MenuButton layoutX="2.0" layoutY="159.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="108.0" text="Mantenimientos">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
-                <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToMRooms" text="Salas" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToMCollections" text="Colecciones" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMSpecies" text="Especies" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMTopics" text="Temáticas" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMPrices" text="Precios" />
                   <MenuItem mnemonicParsing="false" onAction="#goToMCreditCards" text="Comisiones" />
-              </items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToMMuseums" text="Museos" />
+               </items>
                <font>
                   <Font size="10.0" />
                </font>
             </MenuButton>
             <MenuButton layoutX="5.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Entradas">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
-                <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
-              </items>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToSellEntrances" text="Vender entrada" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToValidEntrances" text="Validar entrada" />
+               </items>
             </MenuButton>
             <MenuButton layoutX="5.0" layoutY="214.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Valoración">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
-              </items>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToRateRooms" text="Valorar salas" />
+               </items>
             </MenuButton>
             <MenuButton layoutX="5.0" layoutY="239.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Reportes">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
-              </items>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
+               </items>
             </MenuButton>
             <ImageView fitHeight="87.0" fitWidth="97.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
          </children>
@@ -67,36 +69,61 @@
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="visitorSpace" layoutX="131.0" layoutY="43.0" prefHeight="25.0" prefWidth="137.0" />
+            <TextField fx:id="visitorNameField" layoutX="131.0" layoutY="43.0" prefHeight="25.0" prefWidth="137.0" />
             <ComboBox fx:id="creditCardSpace" layoutX="366.0" layoutY="43.0" prefHeight="25.0" prefWidth="167.0" />
-            <Button layoutX="431.0" layoutY="86.0" mnemonicParsing="false" text="Agregar" />
-            <Button layoutX="472.0" layoutY="338.0" mnemonicParsing="false" text="Vender" />
-            <Label layoutX="23.0" layoutY="90.0" prefHeight="17.0" prefWidth="46.0" text="Museo:">
+            <Button fx:id="addRoomButton" layoutX="431.0" layoutY="111.0" mnemonicParsing="false" onAction="#handleAddRoom" text="Agregar" />
+            <Button fx:id="sellButton" layoutX="472.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleSell" text="Vender" />
+            
+            <Label layoutX="23.0" layoutY="90.0" prefHeight="17.0" prefWidth="46.0" text="Sala:">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <ComboBox fx:id="museumSpace" layoutX="63.0" layoutY="86.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="roomComboBox" layoutX="63.0" layoutY="86.0" prefHeight="25.0" prefWidth="167.0" />
+
             <Label layoutX="249.0" layoutY="90.0" prefHeight="17.0" prefWidth="46.0" text="Fecha:">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="dateSpace" layoutX="292.0" layoutY="86.0" prefHeight="25.0" prefWidth="108.0" />
-            <TableView layoutX="12.0" layoutY="163.0" prefHeight="161.0" prefWidth="553.0">
-              <columns>
-                <TableColumn fx:id="museumColumn" prefWidth="139.0" text="Museo" />
-                <TableColumn fx:id="visitDateColumn" prefWidth="121.0" text="Fecha de visita" />
-                  <TableColumn fx:id="priceColumn" prefWidth="153.0" text="Precio" />
-                  <TableColumn fx:id="priceColumn1" prefWidth="153.0" text="Precio" />
-              </columns>
+            <TextField fx:id="visitDateField" layoutX="292.0" layoutY="86.0" prefHeight="25.0" prefWidth="108.0" promptText="DD/MM/YYYY" />
+
+            <TableView fx:id="roomsTableView" layoutX="12.0" layoutY="163.0" prefHeight="161.0" prefWidth="553.0">
+               <columns>
+                  <TableColumn fx:id="roomNameColumn" prefWidth="139.0" text="Sala" />
+                  <TableColumn fx:id="museumColumn" prefWidth="121.0" text="Museo" />
+                  <TableColumn fx:id="visitDateColumn" prefWidth="121.0" text="Fecha de visita" />
+                  <TableColumn fx:id="priceColumn" prefWidth="132.0" text="Precio" />
+               </columns>
             </TableView>
             <Label layoutX="23.0" layoutY="330.0" prefHeight="17.0" prefWidth="54.0" text="Subtotal:" />
-            <Label layoutX="23.0" layoutY="355.0" prefHeight="17.0" prefWidth="54.0" text="IVA:" />
+            <Label layoutX="23.0" layoutY="355.0" prefHeight="17.0" prefWidth="54.0" text="IVA (13%):" />
             <Label layoutX="147.0" layoutY="339.0" prefHeight="17.0" prefWidth="90.0" text="TOTAL A PAGAR:" />
-            <Text fx:id="entrancePrice" layoutX="77.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fx:id="comisionPrice" layoutX="50.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fx:id="totalPrice" layoutX="246.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="subtotalText" layoutX="77.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0.00" />
+            <Text fx:id="ivaText" layoutX="80.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0.00" />
+            <Text fx:id="totalToPayText" layoutX="246.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0.00" />
+            <Label layoutX="12.0" layoutY="68.0" text="Email visitante:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="visitorEmailField" layoutX="107.0" layoutY="64.0" prefHeight="25.0" prefWidth="161.0" />
+            <Label layoutX="277.0" layoutY="68.0" text="Teléfono visitante:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="visitorPhoneField" layoutX="383.0" layoutY="64.0" prefHeight="25.0" prefWidth="150.0" />
+            
+            <Label layoutX="12.0" layoutY="119.0" text="Código de Validación:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="validationCodeField" layoutX="131.0" layoutY="115.0" prefHeight="25.0" prefWidth="137.0" promptText="Código para validar"/>
+            
+            <Label layoutX="12.0" layoutY="140.0" text="Salas seleccionadas:" />
+            <Label fx:id="statusLabel" layoutX="12.0" layoutY="360.0" prefHeight="17.0" prefWidth="100.0" textFill="#e40808" />
          </children>
       </Pane>
    </children>

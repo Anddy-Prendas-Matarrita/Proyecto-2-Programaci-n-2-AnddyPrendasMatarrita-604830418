@@ -4,66 +4,106 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 public class CollectionsManager {
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("user_management");
 
-    public void addPrice(MahnCollections collections) {
+    public void addCollection(MahnCollections collection) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(collections);
+        em.persist(collection);
         em.getTransaction().commit();
         em.close();
     }
 
-    public List<MahnCollections> getPrice() {
+    public List<MahnCollections> getAllCollections() {
         EntityManager em = emf.createEntityManager();
-        List<MahnCollections> collections = em.createQuery("SELECT u FROM MahnCollections u", MahnCollections.class).getResultList();
+        List<MahnCollections> collections = em.createQuery("SELECT c FROM MahnCollections c", MahnCollections.class).getResultList();
         em.close();
         return collections;
     }
 
-    public void updatePrice(MahnCollections collections) {
+    public void updateCollection(MahnCollections collection) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.merge(collections);
+        em.merge(collection);
         em.getTransaction().commit();
         em.close();
     }
 
-    public void deletePrice(BigDecimal userId) {
+    public void deleteCollection(BigDecimal collectionId) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        MahnCollections collections = em.find(MahnCollections.class, userId);
-        if (collections != null) {
-            em.remove(collections);
+        MahnCollections collection = em.find(MahnCollections.class, collectionId);
+        if (collection != null) {
+            em.remove(collection);
         }
         em.getTransaction().commit();
         em.close();
     }
-    public List<MahnPrices> filterPricesByRoomName(String roomName) { //Esta funci[on es para buscar en filtro 1, el precio pero por el nombre de la sala a la que pertenece
+    public MahnRooms getRoomByName(String roomName) {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<MahnPrices> query = em.createQuery(
-                "SELECT p FROM MahnPrices p WHERE p.roomId.roomName LIKE :roomName", MahnPrices.class);
-            query.setParameter("roomName", "%" + roomName + "%");
-            return query.getResultList();
+            TypedQuery<MahnRooms> query = em.createNamedQuery("MahnRooms.findByName", MahnRooms.class);
+            query.setParameter("name", roomName);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
         } finally {
             em.close();
         }
     }
-    
-    public List<MahnPrices> filterPricesByRoom(MahnRooms room) {
+    public List<MahnRooms> getAllRooms() {
         EntityManager em = emf.createEntityManager();
+        List<MahnRooms> rooms = em.createQuery("SELECT r FROM MahnRooms r", MahnRooms.class).getResultList();
+        em.close();
+        return rooms;
+    }
+    public List<MahnCollections> getCollectionsFiltered(String filterType, String filterValue) {
+        EntityManager em = emf.createEntityManager();
+        List<MahnCollections> collections;
         try {
-            TypedQuery<MahnPrices> query = em.createQuery(
-                "SELECT p FROM MahnPrices p WHERE p.roomId = :room", MahnPrices.class);
-            query.setParameter("room", room);
-            return query.getResultList();
+            String jpql;
+            TypedQuery<MahnCollections> query;
+
+            if (filterType == null || filterValue == null || filterValue.trim().isEmpty()) {
+                jpql = "SELECT c FROM MahnCollections c";
+                query = em.createQuery(jpql, MahnCollections.class);
+            } else {
+                switch (filterType.toLowerCase()) {
+                    case "nombre":
+                        jpql = "SELECT c FROM MahnCollections c WHERE LOWER(c.name) LIKE :filterValue";
+                        query = em.createQuery(jpql, MahnCollections.class);
+                        query.setParameter("filterValue", "%" + filterValue.toLowerCase() + "%");
+                        break;
+                    case "descripción":
+                        jpql = "SELECT c FROM MahnCollections c WHERE LOWER(c.description) LIKE :filterValue";
+                        query = em.createQuery(jpql, MahnCollections.class);
+                        query.setParameter("filterValue", "%" + filterValue.toLowerCase() + "%");
+                        break;
+                    case "siglo":
+                        jpql = "SELECT c FROM MahnCollections c WHERE LOWER(c.century) LIKE :filterValue";
+                        query = em.createQuery(jpql, MahnCollections.class);
+                        query.setParameter("filterValue", "%" + filterValue.toLowerCase() + "%");
+                        break;
+                    case "sala": // Filtrar por nombre de la sala relacionada
+                        jpql = "SELECT c FROM MahnCollections c WHERE LOWER(c.roomId.name) LIKE :filterValue";
+                        query = em.createQuery(jpql, MahnCollections.class);
+                        query.setParameter("filterValue", "%" + filterValue.toLowerCase() + "%");
+                        break;
+                    default:
+                        jpql = "SELECT c FROM MahnCollections c";
+                        query = em.createQuery(jpql, MahnCollections.class);
+                        break;
+                }
+            }
+            collections = query.getResultList();
         } finally {
             em.close();
         }
+        return collections;
     }
 
     public void close() {

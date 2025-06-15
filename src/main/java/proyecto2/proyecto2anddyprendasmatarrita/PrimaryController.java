@@ -25,9 +25,9 @@ public class PrimaryController {
          App.setRoot("Prices");
      }
      @FXML
-     public void goToMCreditCards() throws IOException{
-         App.setRoot("Comisiones");
-     }
+      public void goToMCreditCards() throws IOException{
+          App.setRoot("creditCards");
+      }
      @FXML
      public void goToSellEntrances() throws IOException{
          App.setRoot("SellEntrance");
