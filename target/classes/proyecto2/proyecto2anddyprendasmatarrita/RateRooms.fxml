@@ -43,7 +43,14 @@
                     </items>
                 </MenuButton>
                 <ImageView fitHeight="101.0" fitWidth="109.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                <Pane layoutX="14.0" layoutY="14.0" prefHeight="101.0" prefWidth="109.0" style="-fx-border-color: black;" />
+                <Pane layoutX="14.0" layoutY="14.0" prefHeight="101.0" prefWidth="109.0" style="-fx-border-color: black;">
+               <children>
+                  <ImageView fitHeight="101.0" fitWidth="115.0" layoutX="-2.0" layoutY="1.0">
+                     <image>
+                        <Image url="@../../Images/museum.jpg" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
             </children>
         </Pane>
         <Pane layoutX="137.0" layoutY="11.0" prefHeight="377.0" prefWidth="543.0" style="-fx-border-color: black;">

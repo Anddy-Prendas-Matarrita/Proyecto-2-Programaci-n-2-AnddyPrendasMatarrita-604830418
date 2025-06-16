@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -15,7 +16,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.proyecto2anddyprendasmatarrita.CreditCardsController">
    <children>
-      <Pane layoutX="9.0" layoutY="11.0" prefHeight="377.0" prefWidth="167.0" style="-fx-border-color: black;">
+      <Pane layoutX="9.0" layoutY="11.0" prefHeight="377.0" prefWidth="144.0" style="-fx-border-color: black;">
          <children>
             <MenuButton layoutX="14.0" layoutY="162.0" mnemonicParsing="false" text="Mantenimientos">
               <items>
@@ -44,10 +45,13 @@
                 <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
               </items>
             </MenuButton>
-            <ImageView fitHeight="140.0" fitWidth="152.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="121.0" fitWidth="125.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/museum.jpg" />
+               </image></ImageView>
          </children>
       </Pane>
-      <Pane layoutX="175.0" layoutY="11.0" prefHeight="377.0" prefWidth="412.0" style="-fx-border-color: black;">
+      <Pane layoutX="151.0" layoutY="11.0" prefHeight="377.0" prefWidth="436.0" style="-fx-border-color: black;">
          <children>
             <Label layoutX="97.0" layoutY="-2.0" text="Mantenimientos">
                <font>
@@ -67,16 +71,16 @@
             <TextField fx:id="filtroSpace" layoutX="59.0" layoutY="43.0" prefHeight="25.0" prefWidth="97.0" />
             <ComboBox fx:id="filtroCombo" layoutX="206.0" layoutY="43.0" prefHeight="25.0" prefWidth="118.0" />
             <Button layoutX="338.0" layoutY="43.0" mnemonicParsing="false" text="Filtrar" />
-            <TableView fx:id="creditCardsTable" layoutX="14.0" layoutY="84.0" prefHeight="181.0" prefWidth="385.0">
+            <TableView fx:id="creditCardsTable" layoutX="14.0" layoutY="84.0" prefHeight="181.0" prefWidth="416.0">
               <columns>
-                <TableColumn fx:id="typeColumn" prefWidth="170.0" text="Tipo de tarjeta" />
-                <TableColumn fx:id="comisionColumn" prefWidth="110.0" text="Comisión cobrada" />
-                  <TableColumn fx:id="idColumn" prefWidth="104.0" text="ID" />
+                <TableColumn fx:id="typeColumn" prefWidth="211.0" text="Tipo de tarjeta" />
+                <TableColumn fx:id="comisionColumn" prefWidth="126.0" text="Comisión cobrada" />
+                  <TableColumn fx:id="idColumn" prefWidth="78.0" text="ID" />
               </columns>
             </TableView>
             <Button layoutX="23.0" layoutY="338.0" mnemonicParsing="false" text="Eliminar" />
             <Button layoutX="167.0" layoutY="338.0" mnemonicParsing="false" text="Editar" />
-            <Button layoutX="324.0" layoutY="338.0" mnemonicParsing="false" text="Insertar" />
+            <Button layoutX="324.0" layoutY="338.0" mnemonicParsing="false" onAction="#addToDB" text="Insertar" />
             <TextField fx:id="newNameType" layoutX="190.0" layoutY="300.0" prefHeight="25.0" prefWidth="97.0" promptText="Nombre" />
             <Label layoutX="239.0" layoutY="277.0" text="Añadir tipo de  tarjeta">
                <font>

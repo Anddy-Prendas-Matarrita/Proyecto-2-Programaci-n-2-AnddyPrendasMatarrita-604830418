@@ -48,7 +48,10 @@
                   <MenuItem mnemonicParsing="false" onAction="#goToReports" text="Reportes" />
                </items>
             </MenuButton>
-            <ImageView fitHeight="87.0" fitWidth="97.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="66.0" fitWidth="99.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/museum.jpg" />
+               </image></ImageView>
          </children>
       </Pane>
       <Pane layoutX="115.0" layoutY="11.0" prefHeight="377.0" prefWidth="579.0" style="-fx-border-color: black;">
