@@ -92,6 +92,7 @@
             <TextField fx:id="newEra" layoutX="111.0" layoutY="264.0" prefHeight="25.0" prefWidth="97.0" promptText="Época" />
             <TextField fx:id="newFeatures" layoutX="9.0" layoutY="295.0" prefHeight="25.0" prefWidth="97.0" promptText="Características" />
             <TextField fx:id="newSala" layoutX="111.0" layoutY="295.0" prefHeight="25.0" prefWidth="97.0" promptText="Sala" />
+            <Button layoutX="298.0" layoutY="252.0" mnemonicParsing="false" onAction="#updateFromServer" text="Cargar del server" />
          </children>
       </Pane>
    </children>

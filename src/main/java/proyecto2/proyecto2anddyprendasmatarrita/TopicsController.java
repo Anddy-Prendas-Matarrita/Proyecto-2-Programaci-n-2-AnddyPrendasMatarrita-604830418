@@ -58,7 +58,7 @@ public class TopicsController {
             return new javafx.beans.property.SimpleStringProperty(room != null ? room.getName() : "");
         });
 
-        loadData();
+        //loadData();
         topicsTable.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue) -> showDetails(newValue)
         );
@@ -117,7 +117,19 @@ public class TopicsController {
             e.printStackTrace();
         }
     }
-
+    @FXML
+    private void updateFromServer() {
+        TopicsClient client = new TopicsClient();
+        List<MahnTopics> topics = client.getTopicsFromServer();
+        if (topics != null) {
+        listaTematicas.clear();
+        listaTematicas.addAll(topics);
+        topicsTable.setItems(listaTematicas);
+        showAlert(Alert.AlertType.INFORMATION, "Bien", "Datos actualizados desde servidor");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Mal", "No se pudo conectar al servidor");
+        }
+    }
     @FXML
     public void updateTopic() {
         MahnTopics selectedTopic = topicsTable.getSelectionModel().getSelectedItem();

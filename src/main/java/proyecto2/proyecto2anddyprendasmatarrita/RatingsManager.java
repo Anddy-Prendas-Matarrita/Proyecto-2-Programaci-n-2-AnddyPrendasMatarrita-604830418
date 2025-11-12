@@ -17,6 +17,12 @@ public class RatingsManager {
         em.getTransaction().commit();
         em.close();
     }
+    public List<MahnRatings> getAllRatings() { 
+        EntityManager em = emf.createEntityManager();
+        List<MahnRatings> ratings = em.createQuery("SELECT s FROM MahnRatings s", MahnRatings.class).getResultList();
+        em.close();
+        return ratings;
+    }
     public List<Object[]> getRoomRatingsWithRoomAndMuseumNames() {
         EntityManager em = emf.createEntityManager();
         try {

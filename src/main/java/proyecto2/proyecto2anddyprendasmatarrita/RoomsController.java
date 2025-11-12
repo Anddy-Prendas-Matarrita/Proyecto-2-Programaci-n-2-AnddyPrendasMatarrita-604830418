@@ -2,6 +2,7 @@ package proyecto2.proyecto2anddyprendasmatarrita;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,7 +19,7 @@ public class RoomsController {
     private RoomsManager roomManager = new RoomsManager();
     private ObservableList<MahnRooms> listaSalas = FXCollections.observableArrayList();
     @FXML
-    private TableView<MahnRooms> roomTable; 
+    private TableView<MahnRooms> roomsTable; 
     
     @FXML
     private TableColumn<MahnRooms, String> nameColumn;
@@ -62,16 +63,16 @@ public class RoomsController {
         filtroCombo.setItems(FXCollections.observableArrayList("Nombre", "Descripción", "Temática", "Museo"));
         filtroCombo.getSelectionModel().selectFirst(); 
 
-        loadData();
+        //loadData();
         
-        roomTable.getSelectionModel().selectedItemProperty().addListener(
+        roomsTable.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue) -> showDetails(newValue));
     }
     
     public void loadData() {
         listaSalas.clear();
         listaSalas.addAll(roomManager.getAllRooms());
-        roomTable.setItems(listaSalas);
+        roomsTable.setItems(listaSalas);
     }
     
     public void showDetails(MahnRooms room) {
@@ -88,7 +89,19 @@ public class RoomsController {
             clearFields();
         }
     }
-
+    @FXML
+    private void updateFromServer() {
+        RoomsClient client = new RoomsClient();
+        List<MahnRooms> rooms = client.getRoomsFromServer();
+        if (rooms != null) {
+        listaSalas.clear();
+        listaSalas.addAll(rooms);
+        roomsTable.setItems(listaSalas);
+        showAlert(Alert.AlertType.INFORMATION, "Bien", "Datos actualizados desde servidor");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Mal", "No se pudo conectar al servidor");
+        }
+    }
     @FXML
     public void addToDB() {
         try {
@@ -115,8 +128,8 @@ public class RoomsController {
             newRoom.setMuseumId(museum);
 
             roomManager.addRoom(newRoom);
-            loadData(); 
-            clearFields();
+            //loadData(); 
+            //clearFields();
             showAlert(Alert.AlertType.INFORMATION, "Éxito", "Sala añadida correctamente.");
 
         } catch (Exception e) {
@@ -127,7 +140,7 @@ public class RoomsController {
 
     @FXML
     public void delete() {
-        MahnRooms selectedRoom = roomTable.getSelectionModel().getSelectedItem();
+        MahnRooms selectedRoom = roomsTable.getSelectionModel().getSelectedItem();
         if (selectedRoom != null) {
             try {
                 roomManager.deleteRoom(selectedRoom.getRoomId());
@@ -145,7 +158,7 @@ public class RoomsController {
 
     @FXML
     public void updateInDB() {
-        MahnRooms selectedRoom = roomTable.getSelectionModel().getSelectedItem();
+        MahnRooms selectedRoom = roomsTable.getSelectionModel().getSelectedItem();
         if (selectedRoom != null) {
             try {
                 String name = newName.getText();

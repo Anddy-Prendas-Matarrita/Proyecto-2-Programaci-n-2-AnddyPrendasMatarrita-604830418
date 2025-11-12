@@ -92,6 +92,7 @@
                 <TextField fx:id="newDescription" layoutX="336.0" layoutY="277.0" prefHeight="25.0" prefWidth="97.0" promptText="Descripción" />
                 <TextField fx:id="newCentury" layoutX="336.0" layoutY="302.0" prefHeight="25.0" prefWidth="97.0" promptText="Siglo" />
                 <ComboBox fx:id="newRoom" layoutX="227.0" layoutY="302.0" prefHeight="25.0" prefWidth="97.0" promptText="Sala" />
+            <Button layoutX="33.0" layoutY="224.0" mnemonicParsing="false" onAction="#updateFromServer" text="Cargar del servidor" />
             </children>
         </Pane>
     </children>

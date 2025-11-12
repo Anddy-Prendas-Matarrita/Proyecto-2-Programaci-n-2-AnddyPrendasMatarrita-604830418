@@ -96,6 +96,7 @@
             <TextField fx:id="newFundationDate" layoutX="300.0" layoutY="271.0" prefHeight="25.0" prefWidth="106.0" promptText="FundaciónFecha" />
             <TextField fx:id="newDirector" layoutX="206.0" layoutY="296.0" prefHeight="25.0" prefWidth="106.0" promptText="Director" />
             <TextField fx:id="newWebsite" layoutX="308.0" layoutY="296.0" prefHeight="25.0" prefWidth="106.0" promptText="PaǵinaWeb" />
+            <Button fx:id="updateServerButton" layoutX="23.0" layoutY="225.0" mnemonicParsing="false" onAction="#updateFromServer" text="Cargar datos del server" />
             </children>
         </Pane>
     </children>

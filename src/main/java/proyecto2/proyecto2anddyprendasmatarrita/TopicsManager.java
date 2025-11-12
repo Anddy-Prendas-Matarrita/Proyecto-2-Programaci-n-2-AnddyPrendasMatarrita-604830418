@@ -24,7 +24,13 @@ public class TopicsManager {
         em.close();
         return topics;
     }
-
+public List<MahnTopics> getAllTopics() { 
+        EntityManager em = emf.createEntityManager();
+        List<MahnTopics> topics = em.createQuery("SELECT s FROM MahnTopics s", MahnTopics.class).getResultList();
+        em.close();
+        return topics;
+    }
+ 
     public void updateTopic(MahnTopics topics) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

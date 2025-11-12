@@ -52,8 +52,8 @@ public class PricesController {
         });
 
         //esto carga los datos para que se muestren apenas se entra a la pantalla
-        loadData();//datos de prices 
-        loadRoomsFilter();//datos de rooms para que muestre el nombre de la sala en el precio respectivo
+        //loadData();//datos de prices 
+        //loadRoomsFilter();//datos de rooms para que muestre el nombre de la sala en el precio respectivo
 
         //aqui se agrega un listener que llama a showDetails para que muestre en los textFields los detalles de la casilla seleccionada en la tabla
         pricesTable.getSelectionModel().selectedItemProperty().addListener(
@@ -85,6 +85,19 @@ public class PricesController {
             newWeekPrice.clear();
             newSundayPrice.clear();
             newRoom.clear();
+        }
+    }
+    @FXML
+    private void updateFromServer() {
+        PricesClient client = new PricesClient();
+        List<MahnPrices> prices = client.getPricesFromServer();
+        if (prices != null) {
+        listaPrecios.clear();
+        listaPrecios.addAll(prices);
+        pricesTable.setItems(listaPrecios);
+        showAlert(Alert.AlertType.INFORMATION, "Bien", "Datos actualizados desde servidor");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Mal", "No se pudo conectar al servidor");
         }
     }
     @FXML

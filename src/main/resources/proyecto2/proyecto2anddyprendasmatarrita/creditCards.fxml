@@ -89,6 +89,7 @@
             </Label>
             <TextField fx:id="newComisionRate" layoutX="239.0" layoutY="300.0" prefHeight="25.0" prefWidth="109.0" promptText="Comisión cobrada" />
             <Label layoutX="349.0" layoutY="304.0" text="Ejemplo: 0.05" />
+            <Button layoutX="26.0" layoutY="271.0" mnemonicParsing="false" onAction="#updateFromServer" text="Cargar del servidor" />
          </children>
       </Pane>
    </children>

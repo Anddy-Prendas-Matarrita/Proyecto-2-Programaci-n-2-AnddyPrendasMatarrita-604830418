@@ -71,7 +71,7 @@
             <TextField fx:id="filtroSpace" layoutX="59.0" layoutY="43.0" prefHeight="25.0" prefWidth="97.0" />
             <ComboBox fx:id="filtroCombo" layoutX="206.0" layoutY="43.0" prefHeight="25.0" prefWidth="118.0" />
             <Button layoutX="338.0" layoutY="43.0" mnemonicParsing="false" onAction="#filterData" text="Filtrar" />
-            <TableView fx:id="roomTable" layoutX="4.0" layoutY="84.0" prefHeight="164.0" prefWidth="438.0">
+            <TableView fx:id="roomsTable" layoutX="4.0" layoutY="84.0" prefHeight="164.0" prefWidth="438.0">
                <columns>
                  <TableColumn fx:id="nameColumn" prefWidth="94.0" text="Nombre" />
                  <TableColumn fx:id="descriptionColumn" prefWidth="139.0" text="Descripción" />
@@ -93,6 +93,7 @@
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
+            <Button layoutX="23.0" layoutY="259.0" mnemonicParsing="false" onAction="#updateFromServer" text="Cargar del server" />
          </children>
       </Pane>
    </children>

@@ -90,6 +90,7 @@
                 <TextField fx:id="newWeekPrice" layoutX="195.0" layoutY="273.0" prefHeight="25.0" prefWidth="126.0" promptText="Precio entre semana" />
                 <TextField fx:id="newSundayPrice" layoutX="324.0" layoutY="273.0" prefHeight="25.0" prefWidth="106.0" promptText="Precio domingos" />
                 <TextField fx:id="newRoom" layoutX="289.0" layoutY="304.0" prefHeight="25.0" prefWidth="97.0" promptText="Nombre de la sala" />
+            <Button layoutX="26.0" layoutY="215.0" mnemonicParsing="false" onAction="#updateFromServer" text="Cargar del servidor" />
             </children>
         </Pane>
     </children>

@@ -2,6 +2,7 @@ package proyecto2.proyecto2anddyprendasmatarrita;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -87,8 +88,8 @@ public class SpeciesController {
         ));
         filtroCombo.getSelectionModel().selectFirst();
 
-        loadCollections();
-        loadData(); 
+        //loadCollections();
+        //loadData(); 
         speciesTable.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue) -> showDetails(newValue));
     }
@@ -155,7 +156,19 @@ public class SpeciesController {
             e.printStackTrace();
         }
     }
-
+    @FXML
+    private void updateFromServer() {
+        SpeciesClient client = new SpeciesClient();
+        List<MahnSpecies> species = client.getSpeciesFromServer();
+        if (species != null) {
+        listaEspecies.clear();
+        listaEspecies.addAll(species);
+        speciesTable.setItems(listaEspecies);
+        showAlert(Alert.AlertType.INFORMATION, "Bien", "Datos actualizados desde servidor");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Mal", "No se pudo conectar al servidor");
+        }
+    }
     @FXML
     public void delete() {
         MahnSpecies selectedSpecies = speciesTable.getSelectionModel().getSelectedItem();

@@ -107,7 +107,8 @@
             <TextField fx:id="newWeight" layoutX="241.0" layoutY="287.0" prefHeight="25.0" prefWidth="67.0" promptText="Peso" />
             <TextField fx:id="newSize" layoutX="263.0" layoutY="312.0" prefHeight="25.0" prefWidth="67.0" promptText="Tamaño" />
             <TextField fx:id="newFeatures" layoutX="314.0" layoutY="287.0" prefHeight="25.0" prefWidth="97.0" promptText="Características" />
-            <ComboBox fx:id="newCollectionComboBox" layoutX="419.0" layoutY="287.0" prefHeight="25.0" prefWidth="127.0" promptText="Colección" />
+            <ComboBox fx:id="newCollectionComboBox" layoutX="436.0" layoutY="312.0" prefHeight="25.0" prefWidth="127.0" promptText="Colección" />
+            <Button layoutX="430.0" layoutY="275.0" mnemonicParsing="false" onAction="#updateFromServer" text="Cargar datos del server" />
          </children>
       </Pane>
    </children>

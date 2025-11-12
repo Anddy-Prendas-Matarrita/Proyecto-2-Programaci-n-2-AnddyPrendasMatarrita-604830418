@@ -64,7 +64,7 @@ public class CollectionsController {
         filtroCombo.setItems(FXCollections.observableArrayList("Nombre", "Descripción", "Siglo", "Sala"));
         filtroCombo.getSelectionModel().selectFirst();
 
-        loadData();
+        //loadData();
         loadRoomsForComboBox();
         collectionsTable.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue) -> showDetails(newValue));
@@ -82,7 +82,19 @@ public class CollectionsController {
         }
         newRoom.setItems(listaNombresSalas);
     }
-
+    @FXML
+    private void updateFromServer() {
+        CollectionsClient client = new CollectionsClient();
+        List<MahnCollections> collections = client.getCollectionsFromServer();
+        if (collections != null) {
+        listaColecciones.clear();
+        listaColecciones.addAll(collections);
+        collectionsTable.setItems(listaColecciones);
+        showAlert(Alert.AlertType.INFORMATION, "Bien", "Datos actualizados desde servidor");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Mal", "No se pudo conectar al servidor");
+        }
+    }
     public void showDetails(MahnCollections collection) {//Muestra en los espacios la info de la casilla seleccionada
         if (collection != null) {
             newName.setText(collection.getName());

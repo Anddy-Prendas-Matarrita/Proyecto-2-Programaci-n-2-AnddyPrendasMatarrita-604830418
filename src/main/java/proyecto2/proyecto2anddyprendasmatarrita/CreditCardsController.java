@@ -2,6 +2,7 @@ package proyecto2.proyecto2anddyprendasmatarrita;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -49,11 +50,23 @@ public class CreditCardsController {
         filtroCombo.setItems(FXCollections.observableArrayList("Tipo de tarjeta", "Comisión cobrada"));
         filtroCombo.getSelectionModel().selectFirst();
 
-        loadData(); 
+        //loadData(); 
         creditCardsTable.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue) -> showDetails(newValue));
     }
-
+    @FXML
+    private void updateFromServer() {
+        CreditCardsClient client = new CreditCardsClient();
+        List<MahnCreditCards> creditCards = client.getCreditCardsFromServer();
+        if (creditCards != null) {
+        listaCreditCards.clear();
+        listaCreditCards.addAll(creditCards);
+        creditCardsTable.setItems(listaCreditCards);
+        showAlert(Alert.AlertType.INFORMATION, "Bien", "Datos actualizados desde servidor");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Mal", "No se pudo conectar al servidor");
+        }
+    }
     public void loadData() {// carga los datos a la tabla
         listaCreditCards.clear();
         listaCreditCards.addAll(creditCardsManager.getAllCreditCards());

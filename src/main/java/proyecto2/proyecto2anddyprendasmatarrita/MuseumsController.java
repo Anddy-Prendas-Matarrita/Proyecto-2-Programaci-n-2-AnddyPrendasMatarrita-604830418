@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -77,7 +78,7 @@ public class MuseumsController {
         filtroCombo.setItems(FXCollections.observableArrayList("Nombre", "Tipo"));
         filtroCombo.getSelectionModel().selectFirst();
 
-        loadData();
+        //loadData();
         
         museumsTable.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue) -> showDetails(newValue));
@@ -105,7 +106,19 @@ public class MuseumsController {
             clearFields();
         }
     }
-
+    @FXML
+    private void updateFromServer() {
+        MuseumsClient client = new MuseumsClient();
+        List<MahnMuseums> museums = client.getMuseumsFromServer();
+        if (museums != null) {
+        listaMuseos.clear();
+        listaMuseos.addAll(museums);
+        museumsTable.setItems(listaMuseos);
+        showAlert(Alert.AlertType.INFORMATION, "Bien", "Datos actualizados desde servidor");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Error", "No se pudo conectar al servidor");
+        }
+    }
     @FXML
     public void addToDB() {
         try {

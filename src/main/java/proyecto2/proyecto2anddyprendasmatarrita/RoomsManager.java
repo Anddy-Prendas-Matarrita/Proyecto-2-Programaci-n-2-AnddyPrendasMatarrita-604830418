@@ -92,16 +92,26 @@ public class RoomsManager {
         em.close();
     }
 
-    public void deleteRoom(BigDecimal roomId) {
-        EntityManager em = emf.createEntityManager();
+   public void deleteRoom(BigDecimal roomId) {
+    EntityManager em = emf.createEntityManager();
+    try {
         em.getTransaction().begin();
+
         MahnRooms room = em.find(MahnRooms.class, roomId);
         if (room != null) {
-            em.remove(room);
+            em.remove(em.contains(room) ? room : em.merge(room));
         }
+
         em.getTransaction().commit();
+    } catch (Exception e) {
+        if (em.getTransaction().isActive()) em.getTransaction().rollback();
+        e.printStackTrace();
+    } finally {
         em.close();
     }
+}
+
+
     public MahnRooms getRoomByName(String name) {
         EntityManager em = emf.createEntityManager();
         try {
