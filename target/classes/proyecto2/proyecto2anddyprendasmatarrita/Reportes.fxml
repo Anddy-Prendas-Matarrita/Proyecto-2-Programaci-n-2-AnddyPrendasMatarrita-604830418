@@ -75,8 +75,8 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="ratingTypeComboBox" layoutX="14.0" layoutY="245.0" prefWidth="150.0" promptText="Seleccionar tipo..." />
-            <Button layoutX="180.0" layoutY="245.0" mnemonicParsing="false" onAction="#generateRoomRatingsReport" text="Generar Reporte Salas" />
+            <ComboBox fx:id="ratingTypeComboBox" layoutX="4.0" layoutY="245.0" prefWidth="150.0" promptText="Seleccionar tipo..." />
+            <Button layoutX="252.0" layoutY="245.0" mnemonicParsing="false" onAction="#generateRoomRatingsReport" text="Generar Reporte Salas" />
             <TableView fx:id="roomRatingsTable" layoutX="14.0" layoutY="275.0" prefHeight="90.0" prefWidth="380.0">
                <columns>
                   <TableColumn fx:id="roomNameCol" prefWidth="150.0" text="Sala" />
@@ -84,6 +84,8 @@
                   <TableColumn fx:id="averageRatingCol" prefWidth="100.0" text="Puntuación" />
                </columns>
             </TableView>
+            <Button layoutX="275.0" layoutY="115.0" mnemonicParsing="false" onAction="#exportCommissionsReportToFile" text="Exportar comisiones" />
+            <Button layoutX="172.0" layoutY="245.0" mnemonicParsing="false" onAction="#exportRoomRatingsReportToFile" text="Exportar " />
          </children>
       </Pane>
    </children>

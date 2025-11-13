@@ -1,19 +1,25 @@
 
-package proyecto2.proyecto2anddyprendasmatarrita;
-
+package Server;
 
 import java.io.*;
 import java.net.*;
 import java.util.List;
 
 import java.io.IOException;
+import proyecto2.proyecto2anddyprendasmatarrita.CollectionsManager;
+import proyecto2.proyecto2anddyprendasmatarrita.CreditCardsManager;
+import proyecto2.proyecto2anddyprendasmatarrita.MuseumsManager;
+import proyecto2.proyecto2anddyprendasmatarrita.PricesManager;
+import proyecto2.proyecto2anddyprendasmatarrita.RatingsManager;
+import proyecto2.proyecto2anddyprendasmatarrita.RoomsManager;
+import proyecto2.proyecto2anddyprendasmatarrita.SpeciesManager;
+import proyecto2.proyecto2anddyprendasmatarrita.TopicsManager;
 
 
 public class ServidorGeneral {
 
     private static final int PORT = 12345;
 
-    // ==== Instancias de todos los managers ====
     private MuseumsManager museumsManager = new MuseumsManager();
     private RoomsManager roomsManager = new RoomsManager();
     private CollectionsManager collectionsManager = new CollectionsManager();
@@ -23,10 +29,9 @@ public class ServidorGeneral {
     private CreditCardsManager creditCardsManager = new CreditCardsManager();
     private RatingsManager ratingsManager = new RatingsManager();
 
-    // ==== Inicia el servidor general ====
     public void startServer() {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            System.out.println("🟢 Servidor general iniciado en el puerto " + PORT);
+            System.out.println("?Servidor general iniciado en el puerto " + PORT);
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
@@ -35,12 +40,10 @@ public class ServidorGeneral {
             }
 
         } catch (IOException e) {
-            System.err.println("❌ Error al iniciar el servidor general: " + e.getMessage());
+            System.err.println("Error al iniciar el servidor general: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
-    // ==== Maneja cada conexión de cliente ====
     private void handleClient(Socket socket) {
         try (
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -49,7 +52,6 @@ public class ServidorGeneral {
             String command = (String) in.readObject();
             System.out.println("Comando recibido: " + command);
 
-            // ==== Decodificar comando ====
             switch (command.toUpperCase()) {
                 case "GET_MUSEUMS":
                     out.writeObject(museumsManager.getAllMuseums());
@@ -98,7 +100,6 @@ public class ServidorGeneral {
         }
     }
 
-    // ==== Main para arrancar el servidor ====
     public static void main(String[] args) {
         new ServidorGeneral().startServer();
     }

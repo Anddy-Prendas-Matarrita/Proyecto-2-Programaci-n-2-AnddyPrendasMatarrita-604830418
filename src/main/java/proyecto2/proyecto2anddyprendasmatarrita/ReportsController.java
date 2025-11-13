@@ -1,5 +1,7 @@
 package proyecto2.proyecto2anddyprendasmatarrita;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -152,7 +154,72 @@ public class ReportsController {
             e.printStackTrace();
         }
     }
+    @FXML
+private void exportCommissionsReportToFile() {
+    try {
+        String reportText = commissionsOutputArea.getText();
+        if (reportText == null || reportText.trim().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Reporte vacío", 
+                "Primero genera un reporte de comisiones antes de exportarlo.");
+            return;
+        }
 
+        File dir = new File("reportes");
+        if (!dir.exists()) dir.mkdir(); // crear carpeta si no existe
+
+        String fileName = "reportes/reporte_comisiones_" + 
+                          new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date()) + ".txt";
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write("=== REPORTE DE COMISIONES ===\n");
+            writer.write("Generado el: " + new java.util.Date() + "\n\n");
+            writer.write(reportText);
+        }
+
+        showAlert(Alert.AlertType.INFORMATION, "Exportación exitosa", 
+            "El reporte de comisiones se ha guardado correctamente en:\n" + fileName);
+
+    } catch (IOException e) {
+        showAlert(Alert.AlertType.ERROR, "Error de exportación", 
+            "Ocurrió un error al guardar el archivo: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+
+@FXML
+private void exportRoomRatingsReportToFile() {
+    try {
+        ObservableList<RoomRatingData> data = roomRatingsTable.getItems();
+        if (data == null || data.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Reporte vacío", 
+                "Primero genera un reporte de valoración de salas antes de exportarlo.");
+            return;
+        }
+
+        File dir = new File("reportes");
+        if (!dir.exists()) dir.mkdir(); // crear carpeta si no existe
+
+        String fileName = "reportes/reporte_valoracion_salas_" + 
+                          new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date()) + ".txt";
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write("=== REPORTE DE VALORACIÓN DE SALAS ===\n");
+            writer.write("Generado el: " + new java.util.Date() + "\n\n");
+
+            for (RoomRatingData row : data) {
+                writer.write("Sala: " + row.getRoomName() + 
+                             " | Museo: " + row.getMuseumName() + 
+                             " | Promedio: " + String.format("%.2f", row.getAverageRating()) + "\n");
+            }
+        }
+
+        showAlert(Alert.AlertType.INFORMATION, "Exportación exitosa", 
+            "El reporte de valoración de salas se ha guardado correctamente en:\n" + fileName);
+
+    } catch (IOException e) {
+        showAlert(Alert.AlertType.ERROR, "Error de exportación", 
+            "Ocurrió un error al guardar el archivo: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
     private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
